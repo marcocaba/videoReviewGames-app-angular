@@ -9,4 +9,9 @@ import { Component } from '@angular/core';
 })
 export class GamesComponent {
 
+  constructor() {
+    console.log('hola')
+    alert(1 )
+  }
+
 }

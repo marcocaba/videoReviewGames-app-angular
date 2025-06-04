@@ -8,6 +8,7 @@ import { StudyComponent } from './study/study.component';
 import { UserComponent } from './user/user.component';
 
 export const routes: Routes = [
+    { path: '', redirectTo: 'home', pathMatch: 'full' },
     { path: 'home', component: HomeComponent},
     { path: 'company', component: CompanyComponent},
     { path: 'games', component: GamesComponent},
