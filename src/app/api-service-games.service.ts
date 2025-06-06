@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Game } from './models/Game';
@@ -16,5 +16,12 @@ export class ApiServiceGamesService {
     return this.http.get<Game[]>(this.url + "/viewFewGames");
   }
 
+  getGamesByCreator(): Observable<Game[]> {
+    let params = new HttpParams()
+      .set('idCreator', 10)
+      .set('page', 1)
+      .set('size', 4)
+    return this.http.get<Game[]>(this.url + "/viewGamesByCreator", {'params': params})
+  }
 
 }

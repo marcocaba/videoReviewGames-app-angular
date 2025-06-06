@@ -12,17 +12,20 @@ import { ApiServiceGamesService } from '../api-service-games.service';
 export class HomeComponent {
 
   games: Array<Game> = [];
-
+  game: Game = new Game(0,"","","",[],[], [], [], [], [], "")
 
   constructor(private apiServiceGames: ApiServiceGamesService) {
-    // this.apiServiceGames.getAllGames().subscribe({
-    //   next: response => {
-    //     this.games = response;
-    //   },
-    //   error: error => {
-    //     console.error(error);
-    //   }
-    // });
+    this.apiServiceGames.getGamesByCreator().subscribe({
+      next: response => {
+        this.games = response;
+        this.game = this.games[0];
+      },
+      error: error => {
+        console.error(error);
+      }
+    });
+
+    console.log(JSON.stringify(this.games))
 
   }
 

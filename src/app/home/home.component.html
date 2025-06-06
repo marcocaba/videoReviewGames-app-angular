@@ -4,37 +4,37 @@
     </header>
 
     <main class="content-area">
-             <section class="carousel-section">
+        <section class="carousel-section">
             <button class="carousel-nav-button prev-button" aria-label="Previous Slide">
                 <svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
-                    <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+                    <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" />
                 </svg>
             </button>
-            
+
             <div class="carousel-content">
                 <div class="carousel-item active">
-                    <img src="img\rdr_foto1.jpg" class="carousel-main-image">
+                    <img src="{{game.image}}" class="carousel-main-image">
                     <div class="carousel-overlay">
                         <div class="carousel-poster">
-                            <img src="img\rdr_foto2.jpg" class="poster-image">
+                            <img src="{{game.image}}" class="poster-image">
                             <div class="add-button">+</div>
                         </div>
                         <div class="carousel-info">
                             <div class="play-button">
                                 <svg viewBox="0 0 24 24" fill="currentColor" width="48" height="48">
-                                    <path d="M8 5v14l11-7z"/>
+                                    <path d="M8 5v14l11-7z" />
                                 </svg>
                             </div>
-                            <h3 class="carousel-title">Read Dead Redemption 2</h3>
-                            <p class="carousel-description">by RockstarGames</p>
+                            <h3 class="carousel-title">{{game.name}}</h3>
+                            <p class="carousel-description">{{game.creators[1]}}</p>
                         </div>
                     </div>
                 </div>
-                </div>
+            </div>
 
             <button class="carousel-nav-button next-button" aria-label="Next Slide">
                 <svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
-                    <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/>
+                    <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z" />
                 </svg>
             </button>
         </section>
@@ -42,24 +42,25 @@
             <h2>Nuevos Juegos</h2>
             <div class="games-grid">
                 <div class="game-card-thumbnail">
-                    <img>
-                    <h3>Red Dead Redemption 2</h3>
-                    <p>By Rockstar Games</p>
+                    <img src="{{game.image}}">
+                    <h3>{{game.name}}</h3>
+                    <p>{{game.creators[0]}}</p>
                 </div>
                 <div class="game-card-thumbnail">
-                    <img >
-                    <h3>Red Dead Redemption 2</h3>
-                    <p>By Rockstar Games</p>
+                    <img src="{{game.image}}">
+                    <h3>{{game.name}}</h3>
+                    <p>{{game.creators[0]}}</p>
                 </div>
                 <div class="game-card-thumbnail">
-                    <img>
-                    <h3>Red Dead Redemption 2</h3>
-                    <p>By Rockstar Games</p>
+                    <img src="{{game.image}}">
+                    <h3>{{game.name}}</h3>
+                    <p>{{game.creators[0]}}</p>
                 </div>
                 <div class="game-card-thumbnail">
-                    <img>
-                    <h3>Red Dead Redemption 2</h3>
-                    <p>By Rockstar Games</p>
+                    <img src="{{game.image}}">
+
+                    <h3>{{game.name}}</h3>
+                    <p>{{game.creators[0]}}</p>
                 </div>
             </div>
         </section>
@@ -68,51 +69,29 @@
             <h2>Top Juegos</h2>
             <div class="games-grid">
                 <div class="game-card-full">
-                    <img>
-                    <h3>Red Dead Redemption 2</h3>
-                    <p>By Rockstar Games</p>
-                </div>
-                <div class="game-card-full">
-                    <img>
-                    <h3>Red Dead Redemption 2</h3>
-                    <p>By Rockstar Games</p>
-                </div>
-                <div class="game-card-full">
-                    <img>
-                    <h3>Red Dead Redemption 2</h3>
-                    <p>By Rockstar Games</p>
-                </div>
-                <div class="game-card-full">
-                    <img>
-                    <h3>Red Dead Redemption 2</h3>
-                    <p>By Rockstar Games</p>
-                </div>
-                <div class="game-card-full">
-                    <img>
-                    <h3>Red Dead Redemption 2</h3>
-                    <p>By Rockstar Games</p>
-                </div>
-            </div>
-        </section>
+                    <img src="{{game.image}}">
 
-        <section class="companies-section">
-            <h2>Compañías</h2>
-            <div class="companies-grid games-grid">
-                <div class="game-card-full">
-                    <img>
-                    <h3>Red Dead Redemption 2</h3>
-                    <p>By Rockstar Games</p>
+                    <h3>{{game.name}}</h3>
+                    <p>{{game.creators[0]}}</p>
                 </div>
                 <div class="game-card-full">
-                    <img>
-                    <h3>Red Dead Redemption 2</h3>
-                    <p>By Rockstar Games</p>
+                    <img src="{{game.image}}">
+
+                    <h3>{{game.name}}</h3>
+                    <p>{{game.creators[0]}}</p>
                 </div>
                 <div class="game-card-full">
-                    <img>
-                    <h3>Red Dead Redemption 2</h3>
-                    <p>By Rockstar Games</p>
+                    <img src="{{game.image}}">
+
+                    <h3>{{game.name}}</h3>
+                    <p>{{game.creators[0]}}</p>
                 </div>
+                <div class="game-card-full">
+                    <img src="{{game.image}}">
+                    <h3>{{game.name}}</h3>
+                    <p>{{game.creators[0]}}</p>
+                </div>
+
             </div>
         </section>
     </main>
