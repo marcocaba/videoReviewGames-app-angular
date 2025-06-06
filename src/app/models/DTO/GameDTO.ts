@@ -8,8 +8,8 @@ export class GameDTO {
     released: string;
     image: string;
     imageSecond: string;
-    tags: Tag[];
-    creators: Creator[];
+    tags: Tag[] = [];
+    creators: Creator[] = [];
 
     constructor(id: number, name: string, description: string, released: string, image: string, imageSecond: string, tags: Tag[], creators: Creator[]) {
         this.id = id;

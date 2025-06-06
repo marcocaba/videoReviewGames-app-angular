@@ -22,8 +22,8 @@ export class ApiServiceGamesService {
     return this.http.get<GameDTO[]>(this.url + "/viewCarouselGamesDTO")
   }
 
-  getGamesDTO(): Observable<ObjectPage> {
-    let params = new HttpParams().set('page', 20)
+  getGamesDTO(page:number): Observable<ObjectPage> {
+    let params = new HttpParams().set('page', page)
     return this.http.get<ObjectPage>(this.url + '/viewGamesDTO', {'params': params})
   }
 }
