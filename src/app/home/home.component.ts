@@ -2,34 +2,79 @@ import { Component } from '@angular/core';
 import { Game } from '../models/Game';
 import { ApiServiceGamesService } from '../api-service-games.service';
 import { GameDTO } from '../models/DTO/GameDTO';
+import { NgFor } from '@angular/common';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [],
+  imports: [NgFor, CommonModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
 export class HomeComponent {
 
-  games: Array<GameDTO> = [];
-  game: GameDTO = new GameDTO(0, "", "","","","",[],[])
+  newGames: Array<GameDTO> = new Array<GameDTO>();
+  topGames: Array<GameDTO> = new Array<GameDTO>();
+  carouselGames: Array<GameDTO> = new Array<GameDTO>();
+  carouselGameActive: GameDTO | undefined ;
+  carouselCount: number = 0;
 
   constructor(private apiServiceGames: ApiServiceGamesService) {
-    this.apiServiceGames.getGamesByCreator().subscribe({
+    this.getNewGames();
+    this.getCarouselGames();
+    this.carouselCount = 0;
+    this.carouselGameActive = this.carouselGames[0];
+  }
+
+  showGame(idGame:any){
+    alert(idGame)
+  }
+
+  addFavorites(idGame:any){
+    alert(idGame)
+  }
+
+  previousSlide() {
+    if(this.carouselCount > 0){
+      this.carouselCount = this.carouselCount - 1;
+    }else{
+      this.carouselCount = 3;
+    }
+
+    this.carouselGameActive = this.carouselGames[this.carouselCount]
+  }
+
+  nextSlide(){
+    if(this.carouselCount < 3){
+      this.carouselCount = this.carouselCount + 1;
+    }else{
+      this.carouselCount = 0;
+    }
+
+    this.carouselGameActive = this.carouselGames[this.carouselCount]
+  }
+
+  getNewGames() {
+    this.apiServiceGames.getNewestGames().subscribe({
       next: response => {
-        this.games = response.objectList;
+        this.newGames = response;
       },
       error: error => {
         console.error(error);
       }
     });
-
-    console.log(JSON.stringify(this.games))
-
   }
 
-  
-
+  getCarouselGames() {
+    this.apiServiceGames.getCarouselGames().subscribe({
+      next: response => {
+        this.carouselGames = response;
+      },
+      error: error => {
+        console.error(error);
+      }
+    });
+  }
 
 }

@@ -34,7 +34,7 @@ export class GamesComponent {
 
   let text = rawText.replace(/<br\s*\/?>/gi, '\n');
 
-  text = text.replace(/<li>/gi, '• ');
+  text = text.replace(/<li>/gi, '� ');
   text = text.replace(/<\/li>/gi, '\n');
 
   text = text.replace(/<\/?ul>/gi, '\n');

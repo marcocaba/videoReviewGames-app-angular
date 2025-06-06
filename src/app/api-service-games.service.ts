@@ -2,6 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Game } from './models/Game';
+import { GameDTO } from './models/DTO/GameDTO';
 import { ObjectPage } from './models/DTO/ObjectPage';
 
 @Injectable({
@@ -13,20 +14,16 @@ export class ApiServiceGamesService {
 
   constructor(private http: HttpClient) { }
 
-  getAllGames(): Observable<Game[]> {
-    return this.http.get<Game[]>(this.url + "/viewFewGames");
+  getNewestGames(): Observable<GameDTO[]> {
+    return this.http.get<GameDTO[]>(this.url + "/viewNewestGamesDTO")
   }
 
-  getGamesByCreator(): Observable<ObjectPage> {
-    let params = new HttpParams()
-      .set('idCreator', 10)
-      .set('page', 20)
-    return this.http.get<ObjectPage>(this.url + "/viewGamesByCreator", {'params': params})
+  getCarouselGames(): Observable<GameDTO[]> {
+    return this.http.get<GameDTO[]>(this.url + "/viewCarouselGamesDTO")
   }
-  
+
   getGamesDTO(): Observable<ObjectPage> {
     let params = new HttpParams().set('page', 20)
     return this.http.get<ObjectPage>(this.url + '/viewGamesDTO', {'params': params})
   }
-
 }
