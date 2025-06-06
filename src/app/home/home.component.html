@@ -5,34 +5,33 @@
 
     <main class="content-area">
         <section class="carousel-section">
-            <button class="carousel-nav-button prev-button" aria-label="Previous Slide">
+            <button class="carousel-nav-button prev-button"  (click)="previousSlide()" aria-label="Previous Slide">
                 <svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
                     <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" />
                 </svg>
             </button>
-
             <div class="carousel-content">
                 <div class="carousel-item active">
-                    <img src="{{game.image}}" class="carousel-main-image">
+                    <img src="{{carouselGameActive?.imageSecond}}" class="carousel-main-image">
                     <div class="carousel-overlay">
                         <div class="carousel-poster">
-                            <img src="{{game.image}}" class="poster-image">
-                            <div class="add-button">+</div>
+                            <img src="{{carouselGameActive?.image}}" class="poster-image">
+                            <button class="add-button" (click)="addFavorites(carouselGameActive?.id)">✰</button>
                         </div>
                         <div class="carousel-info">
-                            <div class="play-button">
+                            <button class="play-button" (click)="showGame(carouselGameActive?.id)">
                                 <svg viewBox="0 0 24 24" fill="currentColor" width="48" height="48">
                                     <path d="M8 5v14l11-7z" />
                                 </svg>
-                            </div>
-                            <h3 class="carousel-title">{{game.name}}</h3>
-                            <p class="carousel-description">{{game.creators[1]}}</p>
+                            </button>
+                            <h3 class="carousel-title">{{carouselGameActive?.name}}</h3>
+                            <p class="carousel-description">{{carouselGameActive?.creators?.[0]?.name}}</p>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <button class="carousel-nav-button next-button" aria-label="Next Slide">
+            <button class="carousel-nav-button next-button" (click)="nextSlide()" aria-label="Next Slide">
                 <svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
                     <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z" />
                 </svg>

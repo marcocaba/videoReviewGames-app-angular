@@ -8,25 +8,55 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [NgFor,CommonModule],
+  imports: [NgFor, CommonModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
 export class HomeComponent {
 
   newGames: Array<GameDTO> = new Array<GameDTO>();
-  topGames:Array<GameDTO> = new Array<GameDTO>();
-  carouselGames:Array<GameDTO> = new Array<GameDTO>();
-
-  game: Game = new Game(0,"","","",[],[], [], [], [], [], "")
+  topGames: Array<GameDTO> = new Array<GameDTO>();
+  carouselGames: Array<GameDTO> = new Array<GameDTO>();
+  carouselGameActive: GameDTO | undefined ;
+  carouselCount: number = 0;
 
   constructor(private apiServiceGames: ApiServiceGamesService) {
     this.getNewGames();
     this.getCarouselGames();
+    this.carouselCount = 0;
+    this.carouselGameActive = this.carouselGames[0];
   }
 
-  getNewGames(){
-     this.apiServiceGames.getNewestGames().subscribe({
+  showGame(idGame:any){
+    alert(idGame)
+  }
+
+  addFavorites(idGame:any){
+    alert(idGame)
+  }
+
+  previousSlide() {
+    if(this.carouselCount > 0){
+      this.carouselCount = this.carouselCount - 1;
+    }else{
+      this.carouselCount = 3;
+    }
+
+    this.carouselGameActive = this.carouselGames[this.carouselCount]
+  }
+
+  nextSlide(){
+    if(this.carouselCount < 3){
+      this.carouselCount = this.carouselCount + 1;
+    }else{
+      this.carouselCount = 0;
+    }
+
+    this.carouselGameActive = this.carouselGames[this.carouselCount]
+  }
+
+  getNewGames() {
+    this.apiServiceGames.getNewestGames().subscribe({
       next: response => {
         this.newGames = response;
       },
@@ -36,11 +66,10 @@ export class HomeComponent {
     });
   }
 
-    getCarouselGames(){
-     this.apiServiceGames.getCarouselGames().subscribe({
+  getCarouselGames() {
+    this.apiServiceGames.getCarouselGames().subscribe({
       next: response => {
         this.carouselGames = response;
-        console.log(JSON.stringify(this.carouselGames))
       },
       error: error => {
         console.error(error);
