@@ -1,0 +1,49 @@
+<main class="main">
+  <nav class="navbar navbar-expand-sm navbar-dark bg-black">
+    <div class="container-fluid">
+      <div class="navbar-content">
+        <div class="left-menu d-flex align-items-center gap-3">
+          <a class="navbar-brand" routerLink="/home">
+            <img src="img\logo_et.png" alt="Logo" style="width:40px;" class="rounded-pill">
+          </a>
+          <ul class="navbar-nav flex-row gap-3 mb-0">
+            <li class="nav-item">
+              <a class="nav-link active" routerLink="/games" routerLinkActive="active"
+                ariaCurrentWhenActive="page">Juegos</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/company" routerLinkActive="active"
+                ariaCurrentWhenActive="page">Compañías</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/study" routerLinkActive="active"
+                ariaCurrentWhenActive="page">Estudios</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/reviews" routerLinkActive="active"
+                ariaCurrentWhenActive="page">Reseñas</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="search-section">
+          <input type="text" placeholder="Buscar" />
+          <button>
+            <svg>...</svg>
+          </button>
+        </div>
+
+        <div class="right-menu">
+
+         <div><a class="nav-link" routerLink="/reviews" routerLinkActive="active" ariaCurrentWhenActive="page">Reseñas</a></div>
+          <div class="user-avatar" routerLink="/user">User</div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</main>
+
+
+<router-outlet></router-outlet>
+
+<app-footer></app-footer>
