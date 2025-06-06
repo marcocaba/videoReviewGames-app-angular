@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Game } from '../models/Game';
 import { ApiServiceGamesService } from '../api-service-games.service';
+import { GameDTO } from '../models/DTO/GameDTO';
 
 @Component({
   selector: 'app-home',
@@ -11,14 +12,13 @@ import { ApiServiceGamesService } from '../api-service-games.service';
 })
 export class HomeComponent {
 
-  games: Array<Game> = [];
-  game: Game = new Game(0,"","","",[],[], [], [], [], [], "")
+  games: Array<GameDTO> = [];
+  game: GameDTO = new GameDTO(0, "", "","","","",[],[])
 
   constructor(private apiServiceGames: ApiServiceGamesService) {
     this.apiServiceGames.getGamesByCreator().subscribe({
       next: response => {
-        this.games = response;
-        this.game = this.games[0];
+        this.games = response.objectList;
       },
       error: error => {
         console.error(error);
