@@ -9,7 +9,7 @@
   <div *ngFor="let game of games" class="card mb-3 bg-dark text-white border-secondary">
     <div class="row g-0">
       <div class="col-md-2 d-flex justify-content-center align-items-center p-2">
-        <img [src]="game.imageSecond" class="img-fluid rounded-start" alt="poster" style="width: 80px;">
+        <img [src]="game.image" class="img-fluid rounded-start" alt="poster" style="width: 80px;">
       </div>
       <div class="col-md-10">
         <div class="card-body">
@@ -30,7 +30,7 @@
 
           <p class="mb-1">{{ cleanAndTruncateHtml(game.description) }}</p>
 
-          <p class="mb-1"><strong>Director: </strong> <span class="text-danger">{{ game.creators[0].name }}</span></p>
+          <p class="mb-1"><strong>Desarrolladora: </strong> <span class="text-danger">{{ game.creators[0].name }}</span></p>
           <!-- <div class="bg-secondary bg-opacity-10 p-2 rounded border-start border-4 border-danger">
             <small class="text-white-50">{{ movie.review }}</small>
           </div> -->
