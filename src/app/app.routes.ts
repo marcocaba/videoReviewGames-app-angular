@@ -5,15 +5,17 @@ import { GamesComponent } from './games/games.component';
 import { PlatformsComponent } from './platforms/platforms.component';
 import { ReviewsComponent } from './reviews/reviews.component';
 import { UserComponent } from './user/user.component';
+import { TagsComponent } from './tags/tags.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
     { path: 'home', component: HomeComponent},
     { path: 'creators', component: CreatorsComponent},
     { path: 'games', component: GamesComponent},
+    { path: 'tags', component: TagsComponent},
     { path: 'platforms', component: PlatformsComponent}, 
     { path: 'reviews', component: ReviewsComponent},
     { path: 'user', component: UserComponent},
-    { path: 'creators/:creatorId', loadComponent: () => import('./creators/creators.component').then(m => m.CreatorsComponent)
-}
+    { path: 'creators/:creatorId', loadComponent: () => import('./creators/creators.component').then(m => m.CreatorsComponent)},
+    { path: 'tags/:tagsId', loadComponent: () => import('./tags/tags.component').then(m => m.TagsComponent)}
 ];

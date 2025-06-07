@@ -4,27 +4,28 @@ import { GameDTO } from '../models/DTO/GameDTO';
 import { ApiServiceGamesService } from '../api-service-games.service';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, RouterModule } from '@angular/router';
-import { Creator } from '../models/Creator';
+import { Tag } from '../models/Tag';
 
 @Component({
-  selector: 'app-creators',
+  selector: 'app-tags',
   standalone: true,
   imports: [NgFor, FormsModule, NgIf, ReactiveFormsModule, RouterModule, CommonModule],
-  templateUrl: './creators.component.html',
-  styleUrl: './creators.component.scss'
+  templateUrl: './tags.component.html',
+  styleUrl: './tags.component.scss'
 })
-export class CreatorsComponent {
+export class TagsComponent {
   games: Array<GameDTO> = [];
   totalPages: number = 0;
   currentPage: number = 0;
   mainImage: string = "";
   searchControl = new FormControl('');
-  creatorId: number = 0;
-  creator!: Creator;
+  tagId: number = 0;
+  tag!: Tag;
+
   constructor(private apiServiceGames: ApiServiceGamesService, private route: ActivatedRoute) {
-    this.creatorId = Number(this.route.snapshot.paramMap.get('creatorId'));
-    this.getGamesByCreator();
-    this.getCreatorById();
+    this.tagId = Number(this.route.snapshot.paramMap.get('tagsId'));
+    this.getGamesByTag();
+    this.getTagById();
   }
 
   calculateTotalPages(totalItems: number) {
@@ -33,7 +34,7 @@ export class CreatorsComponent {
 
   changePage(currentPage: number) {
     this.currentPage = currentPage;
-    this.getGamesByCreator();
+    this.getGamesByTag();
   }
 
   previousPage(): void {
@@ -72,8 +73,8 @@ export class CreatorsComponent {
     }
   }
 
-  getGamesByCreator() {
-    this.apiServiceGames.getGamesByCreator(this.creatorId, this.currentPage).subscribe({
+  getGamesByTag() {
+    this.apiServiceGames.getGamesByTag(this.tagId, this.currentPage).subscribe({
       next: response => {
         this.games = response.objectList;
         this.calculateTotalPages(response.sizeList);
@@ -84,10 +85,10 @@ export class CreatorsComponent {
     })
   }
 
-   getCreatorById() {
-    this.apiServiceGames.getCreatorById(this.creatorId).subscribe({
+  getTagById() {
+    this.apiServiceGames.getTagById(this.tagId).subscribe({
       next: response => {
-        this.creator=response;
+        this.tag = response;
       },
       error: error => {
         console.error(error);

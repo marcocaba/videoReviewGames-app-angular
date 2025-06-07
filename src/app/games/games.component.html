@@ -44,7 +44,7 @@
             </div> -->
           </div>
           <div class="mb-2">
-            <span *ngFor="let genre of game.tags" class="badge bg-secondary me-1">{{ genre.name }}</span>
+            <span *ngFor="let genre of game.tags" class="badge bg-secondary me-1" [routerLink]="['/tags', genre.id]">{{ genre.name }}</span>
           </div>
 
           <p class="mb-1">{{ cleanAndTruncateHtml(game.description) }}</p>

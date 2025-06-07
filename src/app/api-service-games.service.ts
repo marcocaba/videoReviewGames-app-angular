@@ -5,6 +5,7 @@ import { Game } from './models/Game';
 import { GameDTO } from './models/DTO/GameDTO';
 import { ObjectPage } from './models/DTO/ObjectPage';
 import { Creator } from './models/Creator';
+import { Tag } from './models/Tag';
 
 @Injectable({
   providedIn: 'root'
@@ -40,8 +41,21 @@ export class ApiServiceGamesService {
     return this.http.get<ObjectPage>(this.url + "/viewGamesByCreator", { params });
   }
 
-   getCreatorById(idCreator: number): Observable<Creator> {
+  getCreatorById(idCreator: number): Observable<Creator> {
     let params = new HttpParams().set('idCreator', idCreator)
     return this.http.get<Creator>(this.url + "/getCreatorById", { 'params': params })
   }
+
+  getGamesByTag(idTag: number, page: number): Observable<ObjectPage> {
+    let params = new HttpParams()
+      .set('idTag', idTag)
+      .set('page', page);
+    return this.http.get<ObjectPage>(this.url + "/viewGamesByTag", { params });
+  }
+
+  getTagById(idTag: number): Observable<Tag> {
+    let params = new HttpParams().set('idTag', idTag)
+    return this.http.get<Tag>(this.url + "/getTagById", { 'params': params })
+  }
+
 }
