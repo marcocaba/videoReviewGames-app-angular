@@ -43,7 +43,7 @@
                 <div class="game-card-thumbnail" *ngFor="let game of newGames">
                     <img [src]="game.image" alt="{{game.name}}">
                     <h3>{{ game.name }}</h3>
-                    <p>{{ game.creators?.[0]?.name }}</p>
+                    <p>{{ game?.creators?.[0]?.name }}</p>
                 </div>
             </div>
         </section>
@@ -54,7 +54,7 @@
                 <div class="game-card-full" *ngFor="let game of topGames">
                     <img src="{{game.image}}">
                     <h3>{{game.name}}</h3>
-                    <p>{{ game.creators?.[0]?.name }}</p>
+                    <p>{{ game?.creators?.[0]?.name }}</p>
                 </div>
             </div>
         </section>

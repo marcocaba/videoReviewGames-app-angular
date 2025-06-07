@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Game } from './models/Game';
 import { GameDTO } from './models/DTO/GameDTO';
 import { ObjectPage } from './models/DTO/ObjectPage';
+import { Creator } from './models/Creator';
 
 @Injectable({
   providedIn: 'root'
@@ -22,8 +23,25 @@ export class ApiServiceGamesService {
     return this.http.get<GameDTO[]>(this.url + "/viewCarouselGamesDTO")
   }
 
-  getGamesDTO(page:number): Observable<ObjectPage> {
+  getGamesDTO(page: number): Observable<ObjectPage> {
     let params = new HttpParams().set('page', page)
-    return this.http.get<ObjectPage>(this.url + '/viewGamesDTO', {'params': params})
+    return this.http.get<ObjectPage>(this.url + '/viewGamesDTO', { 'params': params })
+  }
+
+  getGameSearcher(gameName: string): Observable<GameDTO[]> {
+    let params = new HttpParams().set('gameName', gameName)
+    return this.http.get<GameDTO[]>(this.url + "/gameSearch", { 'params': params })
+  }
+
+  getGamesByCreator(idCreator: number, page: number): Observable<ObjectPage> {
+    let params = new HttpParams()
+      .set('idCreator', idCreator)
+      .set('page', page);
+    return this.http.get<ObjectPage>(this.url + "/viewGamesByCreator", { params });
+  }
+
+   getCreatorById(idCreator: number): Observable<Creator> {
+    let params = new HttpParams().set('idCreator', idCreator)
+    return this.http.get<Creator>(this.url + "/getCreatorById", { 'params': params })
   }
 }

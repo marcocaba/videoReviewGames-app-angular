@@ -1,51 +1,32 @@
-import { NgFor, NgIf } from '@angular/common';
 import { Component } from '@angular/core';
+import { CommonModule, NgFor, NgIf } from '@angular/common';
 import { GameDTO } from '../models/DTO/GameDTO';
 import { ApiServiceGamesService } from '../api-service-games.service';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { debounceTime, switchMap } from 'rxjs/operators';
 import { of } from 'rxjs';
-import { RouterModule } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
+import { Creator } from '../models/Creator';
 
 @Component({
-  selector: 'app-games',
+  selector: 'app-creators',
   standalone: true,
-  imports: [NgFor, FormsModule, NgIf, ReactiveFormsModule, RouterModule],
-  templateUrl: './games.component.html',
-  styleUrl: './games.component.scss'
+  imports: [NgFor, FormsModule, NgIf, ReactiveFormsModule, RouterModule, CommonModule],
+  templateUrl: './creators.component.html',
+  styleUrl: './creators.component.scss'
 })
-export class GamesComponent {
+export class CreatorsComponent {
   games: Array<GameDTO> = [];
   totalPages: number = 0;
   currentPage: number = 0;
   mainImage: string = "";
   searchControl = new FormControl('');
-
-  constructor(private apiServiceGames: ApiServiceGamesService) {
-    this.getGamesDTO();
-
-    this.searchControl.valueChanges
-      .pipe(
-        debounceTime(300),
-        switchMap(value => {
-          const query = value?.trim() ?? '';
-
-          if (query.length === 0) {
-            this.getGamesDTO();
-            return of([]);
-          }
-
-          return this.apiServiceGames.getGameSearcher(query);
-        })
-      )
-      .subscribe(results => {
-        console.log('Resultados del buscador:', results); 
-        if (results.length > 0) {
-          this.games = results;
-          this.totalPages = 0;
-          this.currentPage = 0;
-        }
-      });
+  creatorId: number = 0;
+  creator!: Creator;
+  constructor(private apiServiceGames: ApiServiceGamesService, private route: ActivatedRoute) {
+    this.creatorId = Number(this.route.snapshot.paramMap.get('creatorId'));
+    this.getGamesByCreator();
+    this.getCreatorById();
   }
 
   calculateTotalPages(totalItems: number) {
@@ -54,7 +35,7 @@ export class GamesComponent {
 
   changePage(currentPage: number) {
     this.currentPage = currentPage;
-    this.getGamesDTO();
+    this.getGamesByCreator();
   }
 
   previousPage(): void {
@@ -70,7 +51,6 @@ export class GamesComponent {
       this.changePage(this.currentPage);
     }
   }
-  
 
   cleanAndTruncateHtml(rawText: string, wordLimit: number = 100): string {
     if (!rawText) return '';
@@ -94,8 +74,8 @@ export class GamesComponent {
     }
   }
 
-  getGamesDTO() {
-    this.apiServiceGames.getGamesDTO(this.currentPage).subscribe({
+  getGamesByCreator() {
+    this.apiServiceGames.getGamesByCreator(this.creatorId, this.currentPage).subscribe({
       next: response => {
         this.games = response.objectList;
         this.calculateTotalPages(response.sizeList);
@@ -106,4 +86,14 @@ export class GamesComponent {
     })
   }
 
+   getCreatorById() {
+    this.apiServiceGames.getCreatorById(this.creatorId).subscribe({
+      next: response => {
+        this.creator=response;
+      },
+      error: error => {
+        console.error(error);
+      }
+    })
+  }
 }
