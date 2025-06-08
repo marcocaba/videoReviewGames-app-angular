@@ -6,6 +6,7 @@ import { GameDTO } from './models/DTO/GameDTO';
 import { ObjectPage } from './models/DTO/ObjectPage';
 import { Creator } from './models/Creator';
 import { Tag } from './models/Tag';
+import { Platform } from './models/Platform';
 
 @Injectable({
   providedIn: 'root'
@@ -56,6 +57,18 @@ export class ApiServiceGamesService {
   getTagById(idTag: number): Observable<Tag> {
     let params = new HttpParams().set('idTag', idTag)
     return this.http.get<Tag>(this.url + "/getTagById", { 'params': params })
+  }
+
+  getGamesByPlatform(idPlatform: number, page: number): Observable<ObjectPage> {
+    let params = new HttpParams()
+      .set('idPlatform', idPlatform)
+      .set('page', page);
+    return this.http.get<ObjectPage>(this.url + "/viewGamesByPlatform", { params });
+  }
+
+  getPlatformById(idPlatform: number): Observable<Platform> {
+    let params = new HttpParams().set('idPlatform', idPlatform)
+    return this.http.get<Platform>(this.url + "/getPlatformById", { 'params': params })
   }
 
 }
