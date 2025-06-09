@@ -82,4 +82,11 @@ export class ApiServiceGamesService {
     return this.http.get<Platform>(this.url + "/getPlatformById", { 'params': params })
   }
 
+  getLogIn(nameUser: string, password:string ): Observable<string> {
+    let params = new HttpParams()
+      .set('nameUser', nameUser)
+      .set('password', password);
+    return this.http.get<string>(this.url + "/logInUser", { 'params': params })
+  }
+
 }

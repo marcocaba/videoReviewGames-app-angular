@@ -1,14 +1,16 @@
-import { CommonModule, Location, NgFor } from '@angular/common';
+import { CommonModule, Location, NgFor, NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ApiServiceGamesService } from '../api-service-games.service';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { Game } from '../models/Game';
 import { filter } from 'rxjs/operators';
+import { RouterModule } from '@angular/router';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-view-game',
   standalone: true,
-  imports: [NgFor, CommonModule],
+  imports: [NgFor, CommonModule, NgFor, FormsModule, NgIf, ReactiveFormsModule, RouterModule],
   templateUrl: './view-game.component.html',
   styleUrl: './view-game.component.scss'
 })
@@ -29,6 +31,8 @@ export class ViewGameComponent implements OnInit {
     ).subscribe(() => {
       this.loadGameData();
     });
+
+    this.idGame = Number(this.route.snapshot.paramMap.get('idGame'));
   }
 
   ngOnInit(): void {
@@ -82,11 +86,8 @@ export class ViewGameComponent implements OnInit {
     text = text.replace(/\n{3,}/g, '\n\n').trim();
 
     const words = text.split(/\s+/);
-    if (words.length <= wordLimit) {
-      return text;
-    } else {
-      return words.slice(0, wordLimit).join(' ') + '...';
-    }
+    return words.join(' ');
+  
   }
 
   verJuego(idGame: any) {

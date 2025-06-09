@@ -20,8 +20,9 @@ export const routes: Routes = [
     { path: 'reviews', component: ReviewsComponent},
     { path: 'user', component: UserComponent},
     { path: 'favorites/:idUser', component: FavoritesComponent},
-    { path: 'viewGame/:idGame', component: ViewGameComponent },
+    { path: 'viewGame/:idGame', loadComponent: () => import('./view-game/view-game.component').then(m => m.ViewGameComponent)},
     { path: 'creators/:creatorId', loadComponent: () => import('./creators/creators.component').then(m => m.CreatorsComponent)},
     { path: 'tags/:tagsId', loadComponent: () => import('./tags/tags.component').then(m => m.TagsComponent)}, 
+    { path: 'platforms/:platformId', loadComponent: () => import('./platforms/platforms.component').then(m => m.PlatformsComponent)}, 
     { path: 'login', component: LoginComponent}
 ];

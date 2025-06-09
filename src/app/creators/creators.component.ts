@@ -3,7 +3,7 @@ import { CommonModule, NgFor, NgIf } from '@angular/common';
 import { GameDTO } from '../models/DTO/GameDTO';
 import { ApiServiceGamesService } from '../api-service-games.service';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ActivatedRoute, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { Creator } from '../models/Creator';
 
 @Component({
@@ -21,7 +21,7 @@ export class CreatorsComponent {
   searchControl = new FormControl('');
   creatorId: number = 0;
   creator!: Creator;
-  constructor(private apiServiceGames: ApiServiceGamesService, private route: ActivatedRoute) {
+  constructor(private apiServiceGames: ApiServiceGamesService, private route: ActivatedRoute, private router: Router) {
     this.creatorId = Number(this.route.snapshot.paramMap.get('creatorId'));
     this.getGamesByCreator();
     this.getCreatorById();
@@ -93,5 +93,10 @@ export class CreatorsComponent {
         console.error(error);
       }
     })
+  }
+
+  viewGame(idGame: number) {
+    console.log(idGame)
+    this.router.navigate(['/viewGame/' + idGame]);
   }
 }

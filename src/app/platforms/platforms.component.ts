@@ -3,7 +3,7 @@ import { CommonModule, NgFor, NgIf } from '@angular/common';
 import { GameDTO } from '../models/DTO/GameDTO';
 import { ApiServiceGamesService } from '../api-service-games.service';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ActivatedRoute, RouterModule } from '@angular/router';
+import { ActivatedRoute, Route, Router, RouterModule } from '@angular/router';
 import { Platform } from '../models/Platform';
 
 @Component({
@@ -22,7 +22,7 @@ export class PlatformsComponent {
   platform!: Platform;
   platformId: number = 0;
 
-  constructor(private apiServiceGames: ApiServiceGamesService, private route: ActivatedRoute){
+  constructor(private apiServiceGames: ApiServiceGamesService, private route: ActivatedRoute, private router: Router){
     this.platformId = Number(this.route.snapshot.paramMap.get('platformId'));
     this.getGamesByPlatform();
     this.getPlatformById();
@@ -94,5 +94,10 @@ export class PlatformsComponent {
         console.error(error);
       }
     })
+  }
+
+  viewGame(idGame: number) {
+    console.log(idGame)
+    this.router.navigate(['/viewGame/' + idGame]);
   }
 }
