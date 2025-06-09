@@ -4,11 +4,16 @@ import { ApiServiceGamesService } from '../api-service-games.service';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { Game } from '../models/Game';
 import { filter } from 'rxjs/operators';
+import { ApiServiceReviewsService } from '../api-service-reviews.service';
+import { Review } from '../models/Review';
+import { response } from 'express';
+import { error } from 'console';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-view-game',
   standalone: true,
-  imports: [NgFor, CommonModule],
+  imports: [NgFor, CommonModule, FormsModule],
   templateUrl: './view-game.component.html',
   styleUrl: './view-game.component.scss'
 })
@@ -17,9 +22,12 @@ export class ViewGameComponent implements OnInit {
   idGame: any;
   game: Game = new Game(0, "", "", "", [], [], [], [], [], [], "");
   gamesLike: Array<Game> = [];
+  reviews: Array<Review> = [];
+  newReview: Review = new Review(0,0,0,"",0)
 
   constructor(
     private apiServiceGames: ApiServiceGamesService,
+    private apiServiceReviews: ApiServiceReviewsService,
     private route: ActivatedRoute,
     private router: Router,
     private location: Location
@@ -31,11 +39,11 @@ export class ViewGameComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.loadGameData();
   }
 
-  private loadGameData(): void {
+  loadGameData() {
     this.idGame = this.route.snapshot.paramMap.get('idGame');
     if (this.idGame) {
       this.apiServiceGames.getGameById(this.idGame).subscribe({
@@ -60,6 +68,17 @@ export class ViewGameComponent implements OnInit {
           this.router.navigate(['/404']);
         }
       });
+
+      this.apiServiceReviews.getReviewsByGame(this.idGame, 1).subscribe({
+        next: response => {
+          this.reviews = response.objectList;
+          console.log(this.reviews)
+        },
+        error: error => {
+          console.error(error);
+        }
+      })
+
     } else {
       console.error("No idGame found in route parameters.");
       this.router.navigate(['/games']);
@@ -92,4 +111,14 @@ export class ViewGameComponent implements OnInit {
   verJuego(idGame: any) {
     this.router.navigate(['/viewGame/' + idGame]);
   }
+
+  addReview() {
+    this.router.navigate(['/addReview/']);
+  }
+
+  back() {
+    this.location.back();
+  }
+
+
 }

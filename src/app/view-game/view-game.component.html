@@ -1,4 +1,8 @@
 <main>
+    <div class="p-4">
+        <a (click)="back()" class="text-decoration-none text-danger fw-semibold link-hover " style="cursor: pointer;"> ←
+            Volver Atrás</a>
+    </div>
     <div class="container">
         <div class="row mb-4 align-items-start g-2">
             <div class="col-md-4">
@@ -7,7 +11,7 @@
             </div>
 
             <div class="col-md-8">
-                <h1 class="h5 mb-2 text-end"><strong>Fecha de lanzamiento:</strong> {{ game.released }}</h1>
+                <h1 class="h5 mb-2 text-end"><strong class="fs-5">Fecha de lanzamiento:</strong> {{ game.released }}</h1>
 
                 <div id="carouselExampleControlsNoTouching" class="carousel slide carousel-container"
                     data-bs-touch="false">
@@ -38,42 +42,44 @@
         <h4 class="text-center"><span class="text-danger fs-2"> · </span> Detalles </h4>
 
         <div class="mb-4 py-2">
-            <div class=" py-2">
-                <strong>Sinopsis: </strong>
+            <div class="py-2">
+                <strong class="fs-5">Sinopsis: </strong>
                 <ng-container>
                     <span class="text-danger">{{ cleanAndTruncateHtml(game.description) }}</span>
                 </ng-container>
             </div>
-            <div class=" py-2">
-                <strong>Géneros: </strong>
+            <div class="py-2">
+                <strong class="fs-5">Géneros: </strong>
                 <ng-container *ngFor="let genre of game.genres; let last = last">
                     <span class="text-danger">{{ genre.name }}</span><span *ngIf="!last"> · </span>
                 </ng-container>
             </div>
-            <div class=" py-2">
-                <strong>Desarrollador: </strong>
+            <div class="py-2">
+                <strong class="fs-5">Desarrollador: </strong>
                 <ng-container *ngFor="let creator of game.creators; let last = last">
                     <span class="text-danger">{{ creator.name}}</span><span *ngIf="!last"> · </span>
                 </ng-container>
             </div>
-            <div class=" py-2">
-                <strong>Modos: </strong>
+            <div class="py-2">
+                <strong class="">Modos: </strong>
                 <ng-container *ngFor="let tag of game.tags; let last = last">
                     <span class="text-danger">{{ tag.name }}</span><span *ngIf="!last"> · </span>
                 </ng-container>
             </div>
-            <div class="py-4">
-                <strong>Reviews: </strong> <button class="btn btn-review">Hacer reseña</button>
-            </div>
         </div>
 
         <div class="mb-4">
-            <h4>Imágenes: <button class="btn btn-sm btn-outline-light ms-2">Ver más</button></h4>
+            <strong class="fs-5">Imágenes: <button class="btn btn-sm btn-outline-light ms-2">Ver más</button></strong>
         </div>
-
+        <div class=" py-2">
+            <strong class="fs-5">Reseñas: </strong>
+            <ng-container *ngFor="let review of reviews">
+                <span class="text-danger">{{ review.text }}</span>
+            </ng-container>
+        </div>
         <div class="mb-12 py-4">
-            <h4>Plataformas: </h4>
-            <div class="d-flex flex-wrap gap-2 pt-4">
+            <strong class="fs-5">Plataformas: </strong>
+            <div class="d-flex flex-wrap gap-2 pt-">
                 <div class="d-flex justify-content-center align-items-center bg-white rounded"
                     style="width: 80px; height: 80px;" *ngFor="let platform of game.platforms">
                     <img [src]="platform.url" [alt]="platform.name"
@@ -82,8 +88,8 @@
             </div>
         </div>
 
-        <div class="mb-12 py-4">
-            <h4>Juegos Similares: </h4>
+        <div class="mb-4 py-4">
+            <strong class="fs-5">Juegos Similares: </strong>
             <div class="games-grid">
                 <div class="game-card-thumbnail" *ngFor="let gameLike of gamesLike" (click)="verJuego(gameLike.id)">
                     <img [src]="gameLike.image" alt="{{gameLike.name}}">
@@ -92,7 +98,31 @@
                 </div>
             </div>
         </div>
+        <div class="mb-6 py-4">
+            <form (ngSubmit)="addReview()">
+                <div class="d-flex align-items-center mb-3 mt-3" style="width: 80rem; gap: 1rem;">
+                    <div class="flex-grow-1">
+                        <label for="text" class="form-label text-danger">Título de su reseña:</label>
+                        <input type="text" class="form-control" id="text" name="text" [(ngModel)]="newReview.text">
+                    </div>
+                    <div>
+                        <label for="notaSelect" class="form-label text-danger">Nota:</label>
+                        <select [(ngModel)]="newReview.score" id="notaSelect" class="form-select form-select-sm"
+                            style="width: 80px; font-size: 0.875rem;">
+                            <option *ngFor="let n of [1,2,3,4,5,6,7,8,9,10]" [ngValue]="n">{{ n }}</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="mb-3 mt-3">
+                    <label for="comment" class="form-label text-danger">Escriba su reseña:</label>
+                    <textarea class="form-control" rows="5" id="comment" name="text" [(ngModel)]="newReview.text"></textarea>
+                </div>
+                <button type="submit" class="btn btn-fav">Añadir review</button>
+            </form>
+        </div>
     </div>
+
 </main>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
