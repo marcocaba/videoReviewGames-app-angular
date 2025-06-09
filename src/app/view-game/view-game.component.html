@@ -1,0 +1,98 @@
+<main>
+    <div class="container">
+        <div class="row mb-4 align-items-start g-2">
+            <div class="col-md-4">
+                <h1 class="h3 mb-2">{{ game.name }}</h1>
+                <img [src]="game.image" class="img-fluid rounded poster-image w-100" alt="Póster del juego">
+            </div>
+
+            <div class="col-md-8">
+                <h1 class="h5 mb-2 text-end"><strong>Fecha de lanzamiento:</strong> {{ game.released }}</h1>
+
+                <div id="carouselExampleControlsNoTouching" class="carousel slide carousel-container"
+                    data-bs-touch="false">
+                    <div class="carousel-inner h-100">
+                        <div class="carousel-item h-100" *ngFor="let image of game.screenshots; let i = index"
+                            [ngClass]="{ active: i === 0 }">
+                            <img [src]="image.url" class="d-block w-100 rounded" alt="Screenshot del juego">
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button"
+                        data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Anterior</span>
+                    </button>
+                    <button class="carousel-control-next" type="button"
+                        data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Siguiente</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="mb-4 py-2">
+            <button class="btn btn-fav">Añadir a favoritos</button>
+        </div>
+
+        <h4 class="text-center"><span class="text-danger fs-2"> · </span> Detalles </h4>
+
+        <div class="mb-4 py-2">
+            <div class=" py-2">
+                <strong>Sinopsis: </strong>
+                <ng-container>
+                    <span class="text-danger">{{ cleanAndTruncateHtml(game.description) }}</span>
+                </ng-container>
+            </div>
+            <div class=" py-2">
+                <strong>Géneros: </strong>
+                <ng-container *ngFor="let genre of game.genres; let last = last">
+                    <span class="text-danger">{{ genre.name }}</span><span *ngIf="!last"> · </span>
+                </ng-container>
+            </div>
+            <div class=" py-2">
+                <strong>Desarrollador: </strong>
+                <ng-container *ngFor="let creator of game.creators; let last = last">
+                    <span class="text-danger">{{ creator.name}}</span><span *ngIf="!last"> · </span>
+                </ng-container>
+            </div>
+            <div class=" py-2">
+                <strong>Modos: </strong>
+                <ng-container *ngFor="let tag of game.tags; let last = last">
+                    <span class="text-danger">{{ tag.name }}</span><span *ngIf="!last"> · </span>
+                </ng-container>
+            </div>
+            <div class="py-4">
+                <strong>Reviews: </strong> <button class="btn btn-review">Hacer reseña</button>
+            </div>
+        </div>
+
+        <div class="mb-4">
+            <h4>Imágenes: <button class="btn btn-sm btn-outline-light ms-2">Ver más</button></h4>
+        </div>
+
+        <div class="mb-12 py-4">
+            <h4>Plataformas: </h4>
+            <div class="d-flex flex-wrap gap-2 pt-4">
+                <div class="d-flex justify-content-center align-items-center bg-white rounded"
+                    style="width: 80px; height: 80px;" *ngFor="let platform of game.platforms">
+                    <img [src]="platform.url" [alt]="platform.name"
+                        style="max-width: 100%; max-height: 100%; object-fit: contain;" />
+                </div>
+            </div>
+        </div>
+
+        <div class="mb-12 py-4">
+            <h4>Juegos Similares: </h4>
+            <div class="games-grid">
+                <div class="game-card-thumbnail" *ngFor="let gameLike of gamesLike" (click)="verJuego(gameLike.id)">
+                    <img [src]="gameLike.image" alt="{{gameLike.name}}">
+                    <h3>{{ gameLike.name }}</h3>
+                    <p>{{ gameLike?.creators?.[0]?.name }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

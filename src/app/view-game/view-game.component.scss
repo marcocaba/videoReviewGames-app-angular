@@ -1,0 +1,139 @@
+ $primary-red: #E10000;
+ $dark-background: #1A1A1A;
+ $medium-dark-background: #282828;
+ $light-text: #FFFFFF;
+ $secondary-text: #AAAAAA;
+ $font-family-primary: 'Arial', sans-serif;
+ $font-family-title: 'Impact', sans-serif;
+
+ $breakpoint-desktop: 1200px;
+ $breakpoint-tablet: 768px;
+ $breakpoint-mobile: 480px;
+
+
+ main {
+     background: radial-gradient(circle at top left, #2b1a17, #0f0b0a);
+     color: white;
+     font-family: 'Segoe UI', sans-serif;
+ }
+
+ .badge {
+     background-color: #3a3a3a;
+ }
+
+ .card-img-overlay {
+     background-color: rgba(0, 0, 0, 0.5);
+ }
+
+ .platforms img {
+     width: 64px;
+     height: 64px;
+     object-fit: contain;
+ }
+
+ .btn-fav {
+     background-color: #ff3e3e;
+     color: white;
+ }
+
+ .btn-review {
+     background-color: #ff3e3e;
+     color: white;
+ }
+
+ .btn-review:hover {
+     background-color: #222;
+ }
+
+ .poster-image {
+     height: 400px;
+     object-fit: cover;
+ }
+
+ .carousel-container {
+     height: 420px;
+ }
+
+ .carousel-container img {
+     height: 100%;
+     object-fit: cover;
+ }
+
+ .platform-title {
+     font-weight: bold;
+     font-size: 1.5rem;
+     margin-bottom: 20px;
+ }
+
+ .platform-container {
+     display: flex;
+     flex-wrap: wrap;
+     gap: 15px;
+ }
+
+ .platform-item {
+     background-color: white;
+     width: 80px;
+     height: 80px;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     border-radius: 6px;
+ }
+
+ .platform-item img {
+     max-width: 100%;
+     max-height: 100%;
+     object-fit: contain;
+ }
+
+ .games-grid {
+     display: grid;
+     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+     gap: 25px;
+     justify-content: center;
+
+     @media (max-width: $breakpoint-tablet) {
+         grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+         gap: 20px;
+     }
+
+     @media (max-width: $breakpoint-mobile) {
+         grid-template-columns: 1fr;
+         gap: 15px;
+     }
+ }
+
+ .game-card-thumbnail {
+     background-color: $medium-dark-background;
+     border-radius: 8px;
+     overflow: hidden;
+     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+     cursor: pointer;
+     transition: transform 0.2s ease, box-shadow 0.2s ease;
+     text-align: center;
+
+     &:hover {
+         transform: translateY(-5px);
+         box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+     }
+
+     img {
+         width: 100%;
+         height: 150px;
+         object-fit: cover;
+         border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+     }
+
+     h3 {
+         font-size: 1.2em;
+         margin-top: 15px;
+         color: $light-text;
+     }
+
+     p {
+         font-size: 0.9em;
+         color: $secondary-text;
+         margin-bottom: 15px;
+     }
+ }

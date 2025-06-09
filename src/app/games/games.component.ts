@@ -5,7 +5,8 @@ import { ApiServiceGamesService } from '../api-service-games.service';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { debounceTime, switchMap } from 'rxjs/operators';
 import { of } from 'rxjs';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
+import { routes } from '../app.routes';
 
 @Component({
   selector: 'app-games',
@@ -21,7 +22,7 @@ export class GamesComponent {
   mainImage: string = "";
   searchControl = new FormControl('');
 
-  constructor(private apiServiceGames: ApiServiceGamesService) {
+  constructor(private apiServiceGames: ApiServiceGamesService, private router: Router) {
     this.getGamesDTO();
 
     this.searchControl.valueChanges
@@ -104,6 +105,11 @@ export class GamesComponent {
         console.error(error);
       }
     })
+  }
+
+  viewGame(idGame: number) {
+    console.log(idGame)
+    this.router.navigate(['/viewGame/' + idGame]);
   }
 
 }

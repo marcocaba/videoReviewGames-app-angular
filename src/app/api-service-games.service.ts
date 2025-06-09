@@ -20,6 +20,10 @@ export class ApiServiceGamesService {
     return this.http.get<GameDTO[]>(this.url + "/viewNewestGamesDTO")
   }
 
+  getGameById(idGame: any): Observable<Game> {
+    return this.http.get<Game>(this.url + "/getGameById/" + idGame);
+  } 
+
   getCarouselGames(): Observable<GameDTO[]> {
     return this.http.get<GameDTO[]>(this.url + "/viewCarouselGamesDTO")
   }
@@ -56,6 +60,13 @@ export class ApiServiceGamesService {
   getTagById(idTag: number): Observable<Tag> {
     let params = new HttpParams().set('idTag', idTag)
     return this.http.get<Tag>(this.url + "/getTagById", { 'params': params })
+  }
+
+  getGameByGenre(idGenre: any, page: number): Observable<ObjectPage> {
+    let params = new HttpParams()
+      .set('idGenre', idGenre)
+      .set('page', page);
+    return this.http.get<ObjectPage>(this.url + "/viewGamesByGenre",{ 'params': params })
   }
 
 }
