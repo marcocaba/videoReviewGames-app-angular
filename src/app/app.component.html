@@ -20,8 +20,8 @@
         <div class="right-menu">
 
          <div><a class="nav-link" routerLink="/favorites" routerLinkActive="active" ariaCurrentWhenActive="page">Favoritos</a></div>
-          <div *ngIf="idUser === ''" class="user-avatar" routerLink="/login">Login</div>
-          <div *ngIf="idUser !== ''" class="user-avatar" routerLink="/user">User</div>
+          <div *ngIf="idUser == 0" class="user-avatar" routerLink="/login">Login</div>
+          <div *ngIf="idUser != 0" class="user-avatar" routerLink="/user">User</div>
         </div>
       </div>
     </div>

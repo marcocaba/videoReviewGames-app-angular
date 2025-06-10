@@ -27,6 +27,7 @@ export class HomeComponent {
     this.getCarouselGames();
     this.carouselCount = 0;
     this.carouselGameActive = this.carouselGames[0];
+    
   }
 
   showGame(idGame:any){

@@ -12,17 +12,17 @@ import { LoginComponent } from './login/login.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
-    { path: 'home', component: HomeComponent},
-    { path: 'creators', component: CreatorsComponent},
-    { path: 'games', component: GamesComponent},
-    { path: 'tags', component: TagsComponent},
-    { path: 'platforms', component: PlatformsComponent}, 
-    { path: 'reviews', component: ReviewsComponent},
-    { path: 'user', component: UserComponent},
-    { path: 'favorites/:idUser', component: FavoritesComponent},
-    { path: 'viewGame/:idGame', loadComponent: () => import('./view-game/view-game.component').then(m => m.ViewGameComponent)},
-    { path: 'creators/:creatorId', loadComponent: () => import('./creators/creators.component').then(m => m.CreatorsComponent)},
-    { path: 'tags/:tagsId', loadComponent: () => import('./tags/tags.component').then(m => m.TagsComponent)}, 
-    { path: 'platforms/:platformId', loadComponent: () => import('./platforms/platforms.component').then(m => m.PlatformsComponent)}, 
-    { path: 'login', component: LoginComponent}
+    { path: 'home', component: HomeComponent },
+    { path: 'creators', component: CreatorsComponent },
+    { path: 'games', component: GamesComponent },
+    { path: 'tags', component: TagsComponent },
+    { path: 'platforms', component: PlatformsComponent },
+    { path: 'reviews', component: ReviewsComponent },
+    { path: 'user', component: UserComponent },
+    { path: 'favorites/:idUser', component: FavoritesComponent },
+    { path: 'viewGame/:idGame', loadComponent: () => import('./view-game/view-game.component').then(m => m.ViewGameComponent) },
+    { path: 'creators/:creatorId', loadComponent: () => import('./creators/creators.component').then(m => m.CreatorsComponent) },
+    { path: 'tags/:tagsId', loadComponent: () => import('./tags/tags.component').then(m => m.TagsComponent) },
+    { path: 'platforms/:platformId', loadComponent: () => import('./platforms/platforms.component').then(m => m.PlatformsComponent) },
+    { path: 'login', loadComponent: () => import('./login/login.component').then(m => m.LoginComponent)}
 ];

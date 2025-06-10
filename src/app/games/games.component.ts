@@ -108,7 +108,6 @@ export class GamesComponent {
   }
 
   viewGame(idGame: number) {
-    console.log(idGame)
     this.router.navigate(['/viewGame/' + idGame]);
   }
 

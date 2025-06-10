@@ -86,7 +86,13 @@ export class ApiServiceGamesService {
     let params = new HttpParams()
       .set('nameUser', nameUser)
       .set('password', password);
-    return this.http.get<string>(this.url + "/logInUser", { 'params': params })
+    return this.http.get<string>(this.url + "/logInUser", { 'params': params }, )
   }
+
+  getIdUserByName(nameUser: string): Observable<number> {
+    let params = new HttpParams().set('nameUser', nameUser)
+    return this.http.get<number>(this.url + "/getIdUserByName", { 'params': params })
+  }
+  
 
 }
