@@ -18,7 +18,7 @@
  }
 
  button {
-    cursor: pointer;
+     cursor: pointer;
  }
 
  .badge {
@@ -140,4 +140,30 @@
          color: $secondary-text;
          margin-bottom: 15px;
      }
+ }
+
+ a {
+    cursor: pointer;
+    text-decoration: none;
+ }
+
+ .star-rating {
+     display: inline-block;
+
+     i {
+         cursor: pointer;
+         color: #ffc107;
+         font-size: 1.25rem;
+         margin-right: 2px;
+         transition: transform 0.1s ease-in-out;
+
+         &:hover {
+             transform: scale(1.1);
+         }
+     }
+ }
+
+ .descripcion-completa {
+    background: radial-gradient(circle at top left, #2b1a17, #0f0b0a);
+    font-family: 'Segoe UI', sans-serif;
  }

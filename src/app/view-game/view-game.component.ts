@@ -18,12 +18,13 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './view-game.component.scss'
 })
 export class ViewGameComponent implements OnInit {
-
   idGame: any;
   game: Game = new Game(0, "", "", "", [], [], [], [], [], [], "");
   gamesLike: Array<Game> = [];
+  review: Review = new Review(0, 0, 0, "", 0);
   reviews: Array<Review> = [];
-  newReview: Review = new Review(0,0,0,"",0)
+  newReview: Review = new Review(0, 0, 0, "", 0);
+  score: number = 0;
 
   constructor(
     private apiServiceGames: ApiServiceGamesService,
@@ -45,6 +46,9 @@ export class ViewGameComponent implements OnInit {
 
   loadGameData() {
     this.idGame = this.route.snapshot.paramMap.get('idGame');
+    this.newReview = new Review(0,0,0,"",0);
+    this.newReview.idGame = this.idGame;
+    this.newReview.idUser = 2;
     if (this.idGame) {
       this.apiServiceGames.getGameById(this.idGame).subscribe({
         next: response => {
@@ -69,10 +73,12 @@ export class ViewGameComponent implements OnInit {
         }
       });
 
-      this.apiServiceReviews.getReviewsByGame(this.idGame, 1).subscribe({
+      this.apiServiceReviews.getReviewsByGame(this.idGame, 0).subscribe({
         next: response => {
+          console.log(this.idGame)
           this.reviews = response.objectList;
-          console.log(this.reviews)
+          console.log(response.objectList)
+          this.getRadomReview();
         },
         error: error => {
           console.error(error);
@@ -108,12 +114,55 @@ export class ViewGameComponent implements OnInit {
     }
   }
 
+  getRadomReview(): void {
+    if (this.reviews && this.reviews.length > 0) {
+      const randomIndex = Math.floor(Math.random() * this.reviews.length);
+      this.review = this.reviews[randomIndex];
+    } else {
+      this.review = new Review(0,0,0,"",0); 
+    }
+  }
+
   verJuego(idGame: any) {
     this.router.navigate(['/viewGame/' + idGame]);
   }
 
-  addReview() {
-    this.router.navigate(['/addReview/']);
+  addReview() {   
+    // this.apiServiceReviews.addReview(this.newReview.idUser, this.newReview.idGame, this.newReview.text, this.newReview.score).subscribe({
+    //   next: response => {
+    //     if(response === 'reviewAdded'){ 
+    //       alert('Review añadida con exito')
+    //     }else {
+    //       alert('Review añadida sin exito')
+    //     }
+    //   },
+    //   error: error => {
+    //     console.log(error);
+    //   }
+    // })
+
+    this.apiServiceReviews.addReview(this.newReview).subscribe({
+      next: response => {
+        if(response === 'reviewAdded'){ 
+          alert('Review añadida con exito')
+        }else {
+          alert('Review añadida sin exito')
+        }
+      },
+      error: error => {
+        console.log(error);
+      }
+    })
+
+  }
+
+  setScore(score: number) {
+    this.newReview.score = score;
+  }
+
+
+  verReview(idGame: any) {
+    this.router.navigate(['/viewReview/' + idGame]);
   }
 
   back() {

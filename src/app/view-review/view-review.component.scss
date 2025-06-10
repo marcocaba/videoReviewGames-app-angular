@@ -1,0 +1,24 @@
+ $primary-red: #E10000;
+ $dark-background: #1A1A1A;
+ $medium-dark-background: #282828;
+ $light-text: #FFFFFF;
+ $secondary-text: #AAAAAA;
+ $font-family-primary: 'Arial', sans-serif;
+ $font-family-title: 'Impact', sans-serif;
+
+ $breakpoint-desktop: 1200px;
+ $breakpoint-tablet: 768px;
+ $breakpoint-mobile: 480px;
+
+
+ main {
+     background: radial-gradient(circle at top left, #2b1a17, #0f0b0a);
+     color: white;
+     font-family: 'Segoe UI', sans-serif;
+ }
+
+.poster-image {
+     height: 400px;
+     object-fit: cover;
+ }
+ 

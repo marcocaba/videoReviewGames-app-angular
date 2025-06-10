@@ -9,6 +9,7 @@ import { TagsComponent } from './tags/tags.component';
 import { FavoritesComponent } from './favorites/favorites.component';
 import { ViewGameComponent } from './view-game/view-game.component';
 import { LoginComponent } from './login/login.component';
+import { ViewReviewComponent } from './view-review/view-review.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -23,5 +24,6 @@ export const routes: Routes = [
     { path: 'viewGame/:idGame', component: ViewGameComponent },
     { path: 'creators/:creatorId', loadComponent: () => import('./creators/creators.component').then(m => m.CreatorsComponent)},
     { path: 'tags/:tagsId', loadComponent: () => import('./tags/tags.component').then(m => m.TagsComponent)}, 
-    { path: 'login', component: LoginComponent}
+    { path: 'login', component: LoginComponent},
+    { path: 'viewReview/:idGame', component: ViewReviewComponent }
 ];
