@@ -97,9 +97,9 @@ export class ApiServiceGamesService {
     return this.http.get<ObjectPage>(this.url + "/viewFavoriteGamesById/" + page, { 'params': params })
   }
 
-  addGameToFavorites(idUser: number, gameId: number): Observable<string> {
-    let params = new HttpParams().set('idUser', idUser).set('gameId', gameId);
-    return this.http.post<string>(this.url + "/addGameToFavorites", null, { params: params, responseType: 'text' as 'json' });
+  addGameToFavorites(gameId: number): Observable<string> {
+    let params = new HttpParams().set('gameId', gameId);
+    return this.http.post(this.url + "/addGameToFavorites", null, { params: params,responseType: 'text' });
   }
 
   removeGameFromFavorites(idUser: number, gameId: number): Observable<string> {

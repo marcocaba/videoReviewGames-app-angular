@@ -48,7 +48,7 @@ export class ViewGameComponent implements OnInit {
 
   loadGameData() {
     this.idGame = this.route.snapshot.paramMap.get('idGame');
-    this.newReview = new Review(0,0,0,"",0);
+    this.newReview = new Review(0, 0, 0, "", 0);
     this.newReview.idGame = this.idGame;
     this.newReview.idUser = 2;
     if (this.idGame) {
@@ -121,7 +121,7 @@ export class ViewGameComponent implements OnInit {
       const randomIndex = Math.floor(Math.random() * this.reviews.length);
       this.review = this.reviews[randomIndex];
     } else {
-      this.review = new Review(0,0,0,"",0); 
+      this.review = new Review(0, 0, 0, "", 0);
     }
   }
 
@@ -129,7 +129,7 @@ export class ViewGameComponent implements OnInit {
     this.router.navigate(['/viewGame/' + idGame]);
   }
 
-  addReview() {   
+  addReview() {
     // this.apiServiceReviews.addReview(this.newReview.idUser, this.newReview.idGame, this.newReview.text, this.newReview.score).subscribe({
     //   next: response => {
     //     if(response === 'reviewAdded'){ 
@@ -145,9 +145,9 @@ export class ViewGameComponent implements OnInit {
 
     this.apiServiceReviews.addReview(this.newReview).subscribe({
       next: response => {
-        if(response === 'reviewAdded'){ 
+        if (response === 'reviewAdded') {
           alert('Review añadida con exito')
-        }else {
+        } else {
           alert('Review añadida sin exito')
         }
       },
@@ -158,7 +158,7 @@ export class ViewGameComponent implements OnInit {
   }
 
   addGameToFavorites() {
-    this.apiServiceGames.addGameToFavorites(3, this.game.id).subscribe({
+    this.apiServiceGames.addGameToFavorites(this.game.id).subscribe({
       next: response => {
         console.log(response)
         if (response == "gameAdded") {
@@ -167,6 +167,8 @@ export class ViewGameComponent implements OnInit {
           alert("Lamentablemente no está disponible el juego para ser añadido a la lista de favoritos")
         } else if (response == "contains") {
           alert(this.game.name + " ya se encuentra en tu lista de favoritos")
+        }else if(response=="needLogIn"){
+          alert("Para añadir un juego a tu lista de favoritos inicia sesión")
         }
       },
       error: error => {
