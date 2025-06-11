@@ -72,7 +72,6 @@ export class ViewReviewComponent {
         this.apiServiceUser.getUserById(idUser).subscribe({
           next: response => {
             this.userNamesMap.set(idUser, response);
-            console.log(response)
           },
           error: error => {
             if (error.status === 404) {

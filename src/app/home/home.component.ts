@@ -106,7 +106,6 @@ export class HomeComponent {
   addGameToFavorites(game: GameDTO) {
     this.apiServiceGames.addGameToFavorites(game.id).subscribe({
       next: response => {
-        console.log(response)
         if (response == "gameAdded") {
           alert(game.name + " añadido a tu lista de favoritos")
 

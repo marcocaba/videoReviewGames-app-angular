@@ -96,7 +96,6 @@ export class CreatorsComponent {
   }
 
   viewGame(idGame: number) {
-    console.log(idGame)
     this.router.navigate(['/viewGame/' + idGame]);
   }
 }

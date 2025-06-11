@@ -93,7 +93,6 @@ export class ReviewsComponent {
   }
 
   viewGame(idGame: number) {
-    console.log(idGame)
     this.router.navigate(['/viewGame/' + idGame]);
   }
   onEditReview(review: Review): void {

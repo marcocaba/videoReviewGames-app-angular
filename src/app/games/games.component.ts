@@ -38,7 +38,6 @@ export class GamesComponent {
         })
       )
       .subscribe(results => {
-        console.log('Resultados del buscador:', results);
         if (results.length > 0) {
           this.games = results;
           this.totalPages = 0;

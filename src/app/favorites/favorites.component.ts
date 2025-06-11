@@ -86,7 +86,6 @@ export class FavoritesComponent {
 
     this.apiServiceGames.removeGameFromFavorites(3, game.id).subscribe({
       next: response => {
-        console.log(response)
         if (response == "gameRemoved") {
           alert(game.name + " eliminado de tu lista de favoritos")
           this.getFavoriteGamesById();

@@ -75,9 +75,7 @@ export class ViewGameComponent implements OnInit {
 
       this.apiServiceReviews.getReviewsByGame(this.idGame, 0).subscribe({
         next: response => {
-          console.log(this.idGame)
           this.reviews = response.objectList;
-          console.log(response.objectList)
           this.getRadomReview();
         },
         error: error => {
@@ -173,7 +171,6 @@ export class ViewGameComponent implements OnInit {
   addGameToFavorites() {
     this.apiServiceGames.addGameToFavorites(this.game.id).subscribe({
       next: response => {
-        console.log(response)
         if (response == "gameAdded") {
           alert(this.game.name + " añadido a tu lista de favoritos")
 
