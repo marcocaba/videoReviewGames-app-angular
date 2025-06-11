@@ -18,7 +18,7 @@ export const routes: Routes = [
     { path: 'games', component: GamesComponent},
     { path: 'tags', component: TagsComponent},
     { path: 'platforms', component: PlatformsComponent}, 
-    { path: 'reviews', component: ReviewsComponent},
+    { path: 'reviews/:idUser', component: ReviewsComponent},
     { path: 'user', component: UserComponent},
     { path: 'favorites/:idUser', component: FavoritesComponent},
     { path: 'viewGame/:idGame', component: ViewGameComponent },

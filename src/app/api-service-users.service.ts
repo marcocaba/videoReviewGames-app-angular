@@ -8,7 +8,12 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ApiServiceUsersService {
   
-  url: string = "http://localhost:8080";
+  url: string = 'http://localhost:8080';
 
   constructor(private http: HttpClient) { }
+
+  getUserById(id: any): Observable<User> {
+  return this.http.get<User>(this.url+ '/getUserById/'+ id);
+}
+
 }

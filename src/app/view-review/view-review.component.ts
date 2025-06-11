@@ -20,6 +20,7 @@ export class ViewReviewComponent {
   idGame: any;
   game: Game = new Game(0, "", "", "", [], [], [], [], [], [], "");
   reviews: Array<Review> = [];
+  userNamesMap: Map<number, string> = new Map();
 
   constructor(
     private apiServiceGames: ApiServiceGamesService,
@@ -49,6 +50,7 @@ export class ViewReviewComponent {
     this.apiServiceReviews.getReviewsByGame(idGame, 0).subscribe({
       next: response => {
         this.reviews = response.objectList;
+        this.loadUserNamesForReviews(this.reviews);
       },
       error: error => {
         console.error(error);
@@ -65,6 +67,27 @@ export class ViewReviewComponent {
     return media;
   }
 
+  loadUserNamesForReviews(reviews: Review[]): void {
+    reviews.forEach(review => {
+      const idUser = review.idUser;
+      if (!this.userNamesMap.has(idUser)) {
+        this.apiServiceUser.getUserById(idUser).subscribe({
+          next: response => {
+            this.userNamesMap.set(idUser, response.name);
+            console.log(response)
+          },
+          error: error => {
+            if (error.status === 404) {
+              this.userNamesMap.set(idUser, "Usuario no encontrado");
+            } else {
+              this.userNamesMap.set(idUser, "Error desconocido");
+            }
+            console.error("Error al obtener el usuario:", error);
+          }
+        });
+      }
+    });
+  }
 
   back() {
     this.location.back();

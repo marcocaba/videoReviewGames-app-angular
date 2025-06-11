@@ -20,18 +20,14 @@ export class ApiServiceReviewsService {
     return this.http.get<ObjectPage>(this.url + '/viewReviewsByGame', { params })
   }
 
-  // addReview(idUser: number, idGame: number, text: string, score: number): Observable<string> {
-  //   console.log(idUser)
-  //   let params = new HttpParams()
-  //     .set('idUser', idUser)
-  //     .set('idGame', idGame)
-  //     .set('text', text)
-  //     .set('score', score);
-  //   return this.http.post<string>(this.url + '/addReviewUser', { params })
-  // }
-
-
   addReview(review: Review): Observable<string> {
     return this.http.post<string>(this.url + '/addReviewUser', review)
+  }
+
+  viewReviewsUser(idUser: any, page: number): Observable<ObjectPage> {
+     let params = new HttpParams()
+      .set('idUser', idUser)
+      .set('page', page);
+    return this.http.get<ObjectPage>(this.url + '/viewReviewsUser',  { params })
   }
 }
