@@ -30,4 +30,12 @@ export class ApiServiceReviewsService {
       .set('page', page);
     return this.http.get<ObjectPage>(this.url + '/viewReviewsUser',  { params })
   }
+
+  removeReview(idUser: any, idGame: any): Observable<string> {
+    let params = new HttpParams()
+      .set('idUser', idUser)
+      .set('idGame', idGame);
+    return this.http.delete<string>(this.url + '/removeReviewUser', { params });
+  }
+
 }

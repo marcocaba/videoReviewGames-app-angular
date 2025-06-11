@@ -20,7 +20,7 @@ export class ViewReviewComponent {
   idGame: any;
   game: Game = new Game(0, "", "", "", [], [], [], [], [], [], "");
   reviews: Array<Review> = [];
-  userNamesMap: Map<number, string> = new Map();
+  userNamesMap: Map<number, any> = new Map();
 
   constructor(
     private apiServiceGames: ApiServiceGamesService,
@@ -73,7 +73,7 @@ export class ViewReviewComponent {
       if (!this.userNamesMap.has(idUser)) {
         this.apiServiceUser.getUserById(idUser).subscribe({
           next: response => {
-            this.userNamesMap.set(idUser, response.name);
+            this.userNamesMap.set(idUser, response);
             console.log(response)
           },
           error: error => {
@@ -82,11 +82,14 @@ export class ViewReviewComponent {
             } else {
               this.userNamesMap.set(idUser, "Error desconocido");
             }
-            console.error("Error al obtener el usuario:", error);
+            console.error(error);
           }
         });
       }
     });
+  }
+  viewReviewUser(idUser: any){
+    this.router.navigate(['/reviews/' + idUser]);
   }
 
   back() {
