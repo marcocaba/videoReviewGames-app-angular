@@ -13,11 +13,35 @@ import { ApiServiceGamesService } from './api-service-games.service';
 })
 export class AppComponent {
 
-  idUser: number = 0;
+  logged: boolean = false;
 
-  constructor(private router: Router,) {
-
+  constructor(private router: Router, private apiServiceGames: ApiServiceGamesService ) {
+    this.isLogged();
   }
+
+  isLogged(){
+    this.apiServiceGames.checkLogInState().subscribe({
+      next: response => {
+        this.logged=response
+      },
+      error: error => {
+        console.log(error);
+      }
+    })
+  }
+
+  logOutUser(){
+    this.apiServiceGames.logOutUser().subscribe({
+      next: response => {
+        this.logged=response
+      },
+      error: error => {
+        console.log(error);
+      }
+    })
+  }
+
+
 
   navigateTo(route: string) {
     if (this.router.url === route) {

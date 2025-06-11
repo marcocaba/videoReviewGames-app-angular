@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Inject, PLATFORM_ID } from '@angular/core';
 import { Game } from '../models/Game';
 import { ApiServiceGamesService } from '../api-service-games.service';
 import { GameDTO } from '../models/DTO/GameDTO';
@@ -6,6 +6,7 @@ import { NgFor, NgIf } from '@angular/common';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-home',
@@ -22,21 +23,22 @@ export class HomeComponent {
   carouselGameActive: GameDTO | undefined;
   carouselCount: number = 0;
 
-  constructor(private apiServiceGames: ApiServiceGamesService) {
+  constructor(private apiServiceGames: ApiServiceGamesService, @Inject(PLATFORM_ID) private platformId: Object) {
     this.getNewGames();
     this.getCarouselGames();
     this.carouselCount = 0;
     this.carouselGameActive = this.carouselGames[0];
 
-
   }
 
   ngOnInit() {
-    if (!sessionStorage.getItem('reloaded')) {
-      sessionStorage.setItem('reloaded', 'true');
-      window.location.reload();
-    } else {
-      sessionStorage.removeItem('reloaded'); // opcional, para que funcione la próxima vez que entres
+    if (isPlatformBrowser(this.platformId)) {
+      if (!sessionStorage.getItem('reloaded')) {
+        sessionStorage.setItem('reloaded', 'true');
+        window.location.reload();
+      } else {
+        sessionStorage.removeItem('reloaded');
+      }
     }
   }
 

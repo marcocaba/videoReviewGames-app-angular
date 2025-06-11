@@ -83,10 +83,8 @@ export class ApiServiceGamesService {
   }
 
   getLogIn(nameUser: string, password: string): Observable<string> {
-    let params = new HttpParams()
-      .set('nameUser', nameUser)
-      .set('password', password);
-    return this.http.get<string>(this.url + "/logInUser", { 'params': params },)
+    let params = new HttpParams().set('nameUser', nameUser).set('password', password);
+    return this.http.get(this.url + "/logInUser", { params: params, responseType: 'text'  });
   }
 
   getIdUserByName(nameUser: string): Observable<number> {
@@ -101,13 +99,24 @@ export class ApiServiceGamesService {
 
   addGameToFavorites(idUser: number, gameId: number): Observable<string> {
     let params = new HttpParams().set('idUser', idUser).set('gameId', gameId);
-    return this.http.post(this.url + "/addGameToFavorites", null, { params: params, responseType: 'text' });
+    return this.http.post<string>(this.url + "/addGameToFavorites", null, { params: params, responseType: 'text' as 'json' });
   }
 
   removeGameFromFavorites(idUser: number, gameId: number): Observable<string> {
     let params = new HttpParams().set('idUser', idUser).set('gameId', gameId);
-    return this.http.delete(this.url + "/removeGameFromFavorites", { params: params, responseType: 'text' });
+    return this.http.delete<string>(this.url + "/removeGameFromFavorites", { params: params, responseType: 'text' as 'json' });
   }
 
+  getNameUserByIdUser(): Observable<string> {
+  return this.http.get(this.url + "/getNameUserByIdUser", { responseType: 'text' });
+}
+
+  checkLogInState(): Observable<boolean> {
+    return this.http.get<boolean>(this.url + "/checkLogInState");
+  }
+
+  logOutUser(): Observable<boolean> {
+    return this.http.get<boolean>(this.url + "/logOutUser");
+  }
 
 }

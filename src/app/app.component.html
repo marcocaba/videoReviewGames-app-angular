@@ -12,14 +12,6 @@
                 ariaCurrentWhenActive="page">Juegos</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" routerLink="/creators" routerLinkActive="active"
-                ariaCurrentWhenActive="page">Compañías</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" routerLink="/study" routerLinkActive="active"
-                ariaCurrentWhenActive="page">Estudios</a>
-            </li>
-            <li class="nav-item">
               <a class="nav-link" routerLink="/reviews/1" routerLinkActive="active"
                 ariaCurrentWhenActive="page">Reseñas</a>
             </li>
@@ -28,8 +20,8 @@
         <div class="right-menu">
 
          <div><a class="nav-link" routerLink="/favorites" routerLinkActive="active" ariaCurrentWhenActive="page">Favoritos</a></div>
-          <div *ngIf="idUser == 0" class="user-avatar" routerLink="/login">Login</div>
-          <div *ngIf="idUser != 0" class="user-avatar" routerLink="/user">User</div>
+          <div *ngIf="!logged" class="user-avatar" routerLink="/login">Login</div>
+          <div *ngIf="logged" class="user-avatar"><button (click)="logOutUser()">Cerrar sesión</button></div>
         </div>
       </div>
     </div>

@@ -20,7 +20,7 @@ export const routes: Routes = [
     { path: 'platforms', component: PlatformsComponent}, 
     { path: 'reviews/:idUser', component: ReviewsComponent},
     { path: 'user', component: UserComponent},
-    { path: 'favorites/:idUser', component: FavoritesComponent},
+    { path: 'favorites', component: FavoritesComponent},
     { path: 'viewReview/:idGame', component: ViewReviewComponent },
     { path: 'games', component: GamesComponent },
     { path: 'platforms', component: PlatformsComponent },

@@ -1,9 +1,12 @@
- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" 
+      integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" 
+      crossorigin="anonymous" referrerpolicy="no-referrer" />
+
 <main>
   <form (ngSubmit)="logIn()" #loginForm="ngForm">
     <h1 class="title">Login</h1>
 
-    <label>
+    <label for="nameUser">
       <i class="fa-solid fa-user"></i>
       <input
         placeholder="username"
@@ -15,7 +18,7 @@
       />
     </label>
 
-    <label>
+    <label for="password">
       <i class="fa-solid fa-lock"></i>
       <input
         placeholder="password"
@@ -27,7 +30,8 @@
       />
     </label>
 
-    <button type="submit">Enviar</button>
+    <button type="submit" [disabled]="loginForm.invalid">Enviar</button>
   </form>
 </main>
+
 
