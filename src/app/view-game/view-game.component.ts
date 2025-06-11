@@ -87,7 +87,25 @@ export class ViewGameComponent implements OnInit {
 
     const words = text.split(/\s+/);
     return words.join(' ');
-  
+
+  }
+
+  addGameToFavorites() {
+    this.apiServiceGames.addGameToFavorites(3, this.game.id).subscribe({
+      next: response => {
+        console.log(response)
+        if (response == "gameAdded") {
+          alert(this.game.name + " añadido a tu lista de favoritos")
+        } else if (response == "empty") {
+          alert("Lamentablemente no está disponible el juego para ser añadido a la lista de favoritos")
+        } else if (response == "contains") {
+          alert(this.game.name + " ya se encuentra en tu lista de favoritos")
+        }
+      },
+      error: error => {
+        console.error(error);
+      }
+    })
   }
 
   verJuego(idGame: any) {
