@@ -84,10 +84,10 @@ export class CreatorsComponent {
     })
   }
 
-   getCreatorById() {
+  getCreatorById() {
     this.apiServiceGames.getCreatorById(this.creatorId).subscribe({
       next: response => {
-        this.creator=response;
+        this.creator = response;
       },
       error: error => {
         console.error(error);

@@ -10,50 +10,28 @@
             </form>
         </div>
         <div class="text-danger d-flex justify-content-between align-items-center">
-            <!-- <button (click)="previousPage()" [disabled]="currentPage === 0">Anterior</button> -->
             <a *ngIf="currentPage !== 0" (click)="previousPage()" style="cursor: pointer;"> Anterior </a>
-            <!-- <select id="pageSize" name="currentPage" [(ngModel)]="currentPage" (change)="changePage(currentPage)">
-                <ng-container *ngFor="let page of [].constructor(totalPages); let i = index">
-                    <option [ngValue]="i">{{ i + 1 }}</option>
-                </ng-container>
-            </select> -->
             <select id="pageSize" name="currentPage" [(ngModel)]="currentPage" (change)="changePage(currentPage)"
                 class="form-select form-select-sm w-auto mx-2">
                 <ng-container *ngFor="let page of [].constructor(totalPages); let i = index">
                     <option [ngValue]="i">{{ i + 1 }}</option>
                 </ng-container>
             </select>
-            <!-- <button (click)="nextPage()" [disabled]="currentPage >= totalPages - 1">Siguiente</button> -->
             <a *ngIf="currentPage < totalPages - 1" (click)="nextPage()" style="cursor: pointer;"> Siguiente </a>
         </div>
     </div>
     <div *ngFor="let game of games" class="card mb-3 bg-dark text-white border-secondary p-2 container">
         <div class="row g-0">
-            <!-- <div class="col-md-2 d-flex flex-column  justify-content-center align-items-center">
-                <ng-container *ngIf="game.image === 'joker'; else imageBlock">
-                    <img src="img/logo_et.png" class="img-fluid rounded-start mb-2" alt="poster" />
-                </ng-container>
-                <ng-template #imageBlock>
-                    <img [src]="game.image" class="img-fluid rounded-start" alt="poster" />
-                </ng-template>
-            </div> -->
-            <!-- <div class="col-md-2 d-flex flex-column justify-content-center align-items-center ps-1">
-                <ng-container *ngIf="game.image === 'joker'; else imageBlock">
-                    <img src="img/logo_et.png" class="img-fluid rounded-start mb-2 game-image"
-                        alt="poster" (click)="viewGame(game.id)" />
-                </ng-container>
-                <ng-template #imageBlock>
-                    <img [src]="game.image" class="img-fluid rounded-start game-image" alt="poster" (click)="viewGame(game.id)"/>
-                </ng-template>
-            </div> -->
             <div
                 class="col-md-2 d-flex flex-column justify-content-center align-items-center ps-1 rounded poster-image-container shadow-sm">
                 <div class="poster-image-wrapper">
-                    <ng-container *ngIf="game.image === 'joker'; else imageBlock">
-                        <img src="/assets/img/logo_et.png" class="img-fluid rounded-start" alt="poster"(click)="viewGame(game.id)" />
+                    <ng-container *ngIf="game.image === 'joker' && game.id; else imageBlock">
+                        <img src="/img/logo_et.png" class="img-fluid rounded-start" alt="poster"
+                            (click)="viewGame(game.id)" />
                     </ng-container>
                     <ng-template #imageBlock>
-                        <img [src]="game.image" class="img-fluid rounded-start" alt="poster" (click)="viewGame(game.id)"/>
+                        <img [src]="game.image" class="img-fluid rounded-start" alt="poster"
+                            (click)="viewGame(game.id)" />
                     </ng-template>
                 </div>
             </div>
@@ -82,5 +60,5 @@
             </div>
         </div>
     </div>
-    
+
 </main>

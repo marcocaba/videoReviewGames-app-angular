@@ -1,0 +1,25 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+  integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+  crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<main>
+  <form (ngSubmit)="register()" #loginForm="ngForm">
+    <h1 class="title">Register</h1>
+
+    <label for="nameUser">
+      <i class="fa-solid fa-user"></i>
+      <input placeholder="Nombre de usuario" type="text" id="nameUser" name="nameUser" [(ngModel)]="nameUser" required />
+    </label>
+
+    <label for="firstPassword">
+      <i class="fa-solid fa-lock"></i>
+      <input placeholder="Contraseña" type="firstPassword" id="firstPassword" name="firstPassword" [(ngModel)]="firstPassword" required />
+    </label>
+
+    <label for="secondPassword">
+      <i class="fa-solid fa-lock"></i>
+      <input placeholder="Repetir contraseña" type="secondPassword" id="secondPassword" name="secondPassword" [(ngModel)]="secondPassword" required />
+    </label>
+    <button type="submit" [disabled]="loginForm.invalid">Enviar</button>
+  </form>
+</main>

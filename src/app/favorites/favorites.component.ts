@@ -2,11 +2,8 @@ import { NgFor, NgIf } from '@angular/common';
 import { Component } from '@angular/core';
 import { GameDTO } from '../models/DTO/GameDTO';
 import { ApiServiceGamesService } from '../api-service-games.service';
-import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { debounceTime, switchMap } from 'rxjs/operators';
-import { of } from 'rxjs';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
-import { routes } from '../app.routes';
 
 @Component({
   selector: 'app-favorites',

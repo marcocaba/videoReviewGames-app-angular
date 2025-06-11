@@ -1,6 +1,6 @@
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" 
-      integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" 
-      crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+  integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+  crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 <main>
   <form (ngSubmit)="logIn()" #loginForm="ngForm">
@@ -8,30 +8,18 @@
 
     <label for="nameUser">
       <i class="fa-solid fa-user"></i>
-      <input
-        placeholder="username"
-        type="text"
-        id="nameUser"
-        name="nameUser"
-        [(ngModel)]="nameUser"
-        required
-      />
+      <input placeholder="username" type="text" id="nameUser" name="nameUser" [(ngModel)]="nameUser" required />
     </label>
 
     <label for="password">
       <i class="fa-solid fa-lock"></i>
-      <input
-        placeholder="password"
-        type="password"
-        id="password"
-        name="password"
-        [(ngModel)]="password"
-        required
-      />
+      <input placeholder="password" type="password" id="password" name="password" [(ngModel)]="password" required />
     </label>
-
+    <div class="text-center mt-3">
+      <a (click)="moveToRegister()" class="btn btn-link text-decoration-none">
+        ¿No tienes cuenta? <strong>Registrarse</strong>
+      </a>
+    </div>
     <button type="submit" [disabled]="loginForm.invalid">Enviar</button>
   </form>
 </main>
-
-

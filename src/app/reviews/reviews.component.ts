@@ -7,9 +7,7 @@ import { ApiServiceUsersService } from '../api-service-users.service';
 import { ApiServiceGamesService } from '../api-service-games.service';
 import { Review } from '../models/Review';
 import { User } from '../models/User';
-import { response } from 'express';
 import { FormsModule } from '@angular/forms';
-import { error } from 'console';
 
 declare var bootstrap: any;
 
@@ -21,8 +19,6 @@ declare var bootstrap: any;
   styleUrl: './reviews.component.scss'
 })
 
-
-
 export class ReviewsComponent {
 
   games: Array<Game> = []
@@ -32,7 +28,7 @@ export class ReviewsComponent {
   gamesList: Game[] = [];
   reviewGameMap = new Map<number, any>();
   selectedReview: Review = new Review(0, 0, 0, "", 0);
-
+  updated: boolean = false;
 
   constructor(
     private apiServiceGames: ApiServiceGamesService,
@@ -101,7 +97,7 @@ export class ReviewsComponent {
     this.router.navigate(['/viewGame/' + idGame]);
   }
   onEditReview(review: Review): void {
-    this.selectedReview = { ...review };
+    this.selectedReview = review;
     const modalElement = document.getElementById('editReview');
     if (modalElement) {
       const modal = new bootstrap.Modal(modalElement);
@@ -110,27 +106,45 @@ export class ReviewsComponent {
   }
 
   saveReview(): void {
-    console.log('Reseña actualizada con exito:', this.selectedReview);
+    if (this.selectedReview.score > 0 && this.selectedReview.score < 5) {
+      this.apiServiceReviews.updateReview(this.selectedReview).subscribe({
+        next: response => {
+          this.updated = response;
 
-    const modalElement = document.getElementById('editReview');
-    if (modalElement) {
-      const modal = bootstrap.Modal.getInstance(modalElement);
-      modal.hide();
+        },
+        error: error => {
+          console.error(error);
+        }
+      })
+
+      const modalElement = document.getElementById('editReview');
+      if (modalElement) {
+        const modal = bootstrap.Modal.getInstance(modalElement);
+        modal.hide();
+      }
+    } else {
+      alert("La nota no puede ser mas de 5 ni menos de 0")
+      this.loadReviews(this.idUser);
     }
+
   }
 
   onDeleteReview(review: Review): void {
-    this.apiServiceReviews.removeReview(review.idUser, review.idGame).subscribe({
-      next: response => { 
-        window.location.reload(); 
-        if(response) {
+    this.apiServiceReviews.removeReview(review.idGame).subscribe({
+      next: response => {
+        window.location.reload();
+        if (response == "reviewRemoved") {
           this.loadReviews(this.idUser);
+        } else if (response == "needLogIn") {
+          alert("Se necesita inicio de sesion")
+        } else if (response == "reviewNotFound") {
+          alert("error con la eliminacion")
+        }
+      },
+      error: error => {
+        console.error(error);
       }
-    },
-    error: error => {
-      console.error(error);
-    }
     })
-}
+  }
 
 }

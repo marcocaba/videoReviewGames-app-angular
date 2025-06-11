@@ -1,19 +1,17 @@
 import { CommonModule, Location, NgFor, NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ApiServiceGamesService } from '../api-service-games.service';
-import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
+import { ActivatedRoute, Router, NavigationEnd, RouterModule } from '@angular/router';
 import { Game } from '../models/Game';
 import { filter } from 'rxjs/operators';
 import { ApiServiceReviewsService } from '../api-service-reviews.service';
 import { Review } from '../models/Review';
-import { response } from 'express';
-import { error } from 'console';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-view-game',
   standalone: true,
-  imports: [NgFor, CommonModule, FormsModule],
+  imports: [NgFor, CommonModule, NgFor, FormsModule, NgIf, ReactiveFormsModule, RouterModule],
   templateUrl: './view-game.component.html',
   styleUrl: './view-game.component.scss'
 })
@@ -48,7 +46,7 @@ export class ViewGameComponent implements OnInit {
 
   loadGameData() {
     this.idGame = this.route.snapshot.paramMap.get('idGame');
-    this.newReview = new Review(0, 0, 0, "", 0);
+    this.newReview = new Review(0,0,0,"",0);
     this.newReview.idGame = this.idGame;
     this.newReview.idUser = 2;
     if (this.idGame) {
@@ -130,51 +128,24 @@ export class ViewGameComponent implements OnInit {
   }
 
   addReview() {
-    // this.apiServiceReviews.addReview(this.newReview.idUser, this.newReview.idGame, this.newReview.text, this.newReview.score).subscribe({
-    //   next: response => {
-    //     if(response === 'reviewAdded'){ 
-    //       alert('Review añadida con exito')
-    //     }else {
-    //       alert('Review añadida sin exito')
-    //     }
-    //   },
-    //   error: error => {
-    //     console.log(error);
-    //   }
-    // })
-
     this.apiServiceReviews.addReview(this.newReview).subscribe({
       next: response => {
-        if (response === 'reviewAdded') {
+        if (response == 'reviewAdded') {
           alert('Review añadida con exito')
-        } else {
-          alert('Review añadida sin exito')
+
+        } else if (response == "contains") {
+          alert('Ya has escrito una review de ' + this.game.name)
+        } else if (response == "needLogIn") {
+          alert("Para añadir una review inicia sesión")
         }
       },
       error: error => {
         console.log(error);
       }
     })
-  }
-
-  addGameToFavorites() {
-    this.apiServiceGames.addGameToFavorites(this.game.id).subscribe({
-      next: response => {
-        console.log(response)
-        if (response == "gameAdded") {
-          alert(this.game.name + " añadido a tu lista de favoritos")
-        } else if (response == "empty") {
-          alert("Lamentablemente no está disponible el juego para ser añadido a la lista de favoritos")
-        } else if (response == "contains") {
-          alert(this.game.name + " ya se encuentra en tu lista de favoritos")
-        }else if(response=="needLogIn"){
-          alert("Para añadir un juego a tu lista de favoritos inicia sesión")
-        }
-      },
-      error: error => {
-        console.error(error);
-      }
-    })
+    this.newReview = new Review(0, 0, 0, "", 0);
+    this.loadGameData();
+    this.getRadomReview();
   }
 
   setScore(score: number) {
@@ -190,5 +161,36 @@ export class ViewGameComponent implements OnInit {
     this.location.back();
   }
 
+   calcularMedias(reviews: Array<Review>): number {
+    let media: number = 0;
+    for (let r of reviews) {
+      media = media + r.score;
+    }
+    media = media / reviews.length;
+    return media;
+  }
+
+  addGameToFavorites() {
+    this.apiServiceGames.addGameToFavorites(this.game.id).subscribe({
+      next: response => {
+        console.log(response)
+        if (response == "gameAdded") {
+          alert(this.game.name + " añadido a tu lista de favoritos")
+
+        } else if (response == "empty") {
+          alert("Lamentablemente no está disponible el juego para ser añadido a la lista de favoritos")
+
+        } else if (response == "contains") {
+          alert(this.game.name + " ya se encuentra en tu lista de favoritos")
+
+        } else if (response == "needLogIn") {
+          alert("Para añadir un juego a tu lista de favoritos inicia sesión")
+        }
+      },
+      error: error => {
+        console.error(error);
+      }
+    })
+  }
 
 }

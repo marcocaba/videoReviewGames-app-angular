@@ -3,8 +3,6 @@ import { ApiServiceReviewsService } from '../api-service-reviews.service';
 import { ApiServiceGamesService } from '../api-service-games.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location, NgFor, NgIf } from '@angular/common';
-import { response } from 'express';
-import { error } from 'console';
 import { Game } from '../models/Game';
 import { Review } from '../models/Review';
 import { ApiServiceUsersService } from '../api-service-users.service';
@@ -88,7 +86,7 @@ export class ViewReviewComponent {
       }
     });
   }
-  viewReviewUser(idUser: any){
+  viewReviewUser(idUser: any) {
     this.router.navigate(['/reviews/' + idUser]);
   }
 

@@ -3,7 +3,7 @@ import { CommonModule, NgFor, NgIf } from '@angular/common';
 import { GameDTO } from '../models/DTO/GameDTO';
 import { ApiServiceGamesService } from '../api-service-games.service';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ActivatedRoute, Route, Router, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { Platform } from '../models/Platform';
 
 @Component({

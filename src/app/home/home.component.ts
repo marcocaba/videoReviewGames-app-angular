@@ -1,8 +1,7 @@
 import { Component, Inject, PLATFORM_ID } from '@angular/core';
-import { Game } from '../models/Game';
 import { ApiServiceGamesService } from '../api-service-games.service';
 import { GameDTO } from '../models/DTO/GameDTO';
-import { NgFor, NgIf } from '@angular/common';
+import { NgFor } from '@angular/common';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
@@ -28,6 +27,7 @@ export class HomeComponent {
     this.getCarouselGames();
     this.carouselCount = 0;
     this.carouselGameActive = this.carouselGames[0];
+    this.getBestGames();
 
   }
 
@@ -90,6 +90,40 @@ export class HomeComponent {
         console.error(error);
       }
     });
+  }
+
+  getBestGames() {
+    this.apiServiceGames.getFourBestGames().subscribe({
+      next: response => {
+        this.topGames = response;
+      },
+      error: error => {
+        console.error(error);
+      }
+    });
+  }
+
+  addGameToFavorites(game: GameDTO) {
+    this.apiServiceGames.addGameToFavorites(game.id).subscribe({
+      next: response => {
+        console.log(response)
+        if (response == "gameAdded") {
+          alert(game.name + " añadido a tu lista de favoritos")
+
+        } else if (response == "empty") {
+          alert("Lamentablemente no está disponible el juego para ser añadido a la lista de favoritos")
+
+        } else if (response == "contains") {
+          alert(game.name + " ya se encuentra en tu lista de favoritos")
+
+        } else if (response == "needLogIn") {
+          alert("Para añadir un juego a tu lista de favoritos inicia sesión")
+        }
+      },
+      error: error => {
+        console.error(error);
+      }
+    })
   }
 
 }

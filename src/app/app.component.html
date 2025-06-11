@@ -19,7 +19,8 @@
         </div>
         <div class="right-menu">
 
-         <div><a class="nav-link" routerLink="/favorites" routerLinkActive="active" ariaCurrentWhenActive="page">Favoritos</a></div>
+          <div><a class="nav-link" routerLink="/favorites" routerLinkActive="active"
+              ariaCurrentWhenActive="page">Favoritos</a></div>
           <div *ngIf="!logged" class="user-avatar" routerLink="/login">Login</div>
           <div *ngIf="logged" class="user-avatar"><button (click)="logOutUser()">Cerrar sesión</button></div>
         </div>

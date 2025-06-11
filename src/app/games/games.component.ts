@@ -6,7 +6,6 @@ import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { debounceTime, switchMap } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { Router, RouterModule } from '@angular/router';
-import { routes } from '../app.routes';
 
 @Component({
   selector: 'app-games',
@@ -39,7 +38,7 @@ export class GamesComponent {
         })
       )
       .subscribe(results => {
-        console.log('Resultados del buscador:', results); 
+        console.log('Resultados del buscador:', results);
         if (results.length > 0) {
           this.games = results;
           this.totalPages = 0;
@@ -70,7 +69,7 @@ export class GamesComponent {
       this.changePage(this.currentPage);
     }
   }
-  
+
 
   cleanAndTruncateHtml(rawText: string, wordLimit: number = 100): string {
     if (!rawText) return '';
