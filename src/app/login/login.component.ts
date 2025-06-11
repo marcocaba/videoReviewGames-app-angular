@@ -1,12 +1,33 @@
 import { Component } from '@angular/core';
+import { ApiServiceGamesService } from '../api-service-games.service';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [],
+  imports: [FormsModule, CommonModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
 export class LoginComponent {
+  nameUser: string = "";
+  password: string = "";
+  confirmation: string = "";
+  
+  constructor(private apiServiceGames: ApiServiceGamesService) {
+    
+  }
+
+  logIn() {
+    this.apiServiceGames.getLogIn(this.nameUser, this.password).subscribe({
+      next: response => {
+        this.confirmation = response
+      },
+      error: error => {
+        console.error(error);
+      }
+    })
+  }
 
 }

@@ -2,13 +2,15 @@ import { Component } from '@angular/core';
 import { Game } from '../models/Game';
 import { ApiServiceGamesService } from '../api-service-games.service';
 import { GameDTO } from '../models/DTO/GameDTO';
-import { NgFor } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [NgFor, CommonModule],
+  imports: [NgFor, CommonModule, FormsModule, ReactiveFormsModule, RouterModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
@@ -17,7 +19,7 @@ export class HomeComponent {
   newGames: Array<GameDTO> = new Array<GameDTO>();
   topGames: Array<GameDTO> = new Array<GameDTO>();
   carouselGames: Array<GameDTO> = new Array<GameDTO>();
-  carouselGameActive: GameDTO | undefined ;
+  carouselGameActive: GameDTO | undefined;
   carouselCount: number = 0;
 
   constructor(private apiServiceGames: ApiServiceGamesService) {
@@ -25,30 +27,41 @@ export class HomeComponent {
     this.getCarouselGames();
     this.carouselCount = 0;
     this.carouselGameActive = this.carouselGames[0];
+
+
   }
 
-  showGame(idGame:any){
+  ngOnInit() {
+    if (!sessionStorage.getItem('reloaded')) {
+      sessionStorage.setItem('reloaded', 'true');
+      window.location.reload();
+    } else {
+      sessionStorage.removeItem('reloaded'); // opcional, para que funcione la próxima vez que entres
+    }
+  }
+
+  showGame(idGame: any) {
     alert(idGame)
   }
 
-  addFavorites(idGame:any){
+  addFavorites(idGame: any) {
     alert(idGame)
   }
 
   previousSlide() {
-    if(this.carouselCount > 0){
+    if (this.carouselCount > 0) {
       this.carouselCount = this.carouselCount - 1;
-    }else{
+    } else {
       this.carouselCount = 3;
     }
 
     this.carouselGameActive = this.carouselGames[this.carouselCount]
   }
 
-  nextSlide(){
-    if(this.carouselCount < 3){
+  nextSlide() {
+    if (this.carouselCount < 3) {
       this.carouselCount = this.carouselCount + 1;
-    }else{
+    } else {
       this.carouselCount = 0;
     }
 

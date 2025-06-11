@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { FooterComponent } from "./footer/footer.component";
 import { NgIf } from '@angular/common';
+import { ApiServiceGamesService } from './api-service-games.service';
 
 @Component({
   selector: 'app-root',
@@ -12,14 +13,13 @@ import { NgIf } from '@angular/common';
 })
 export class AppComponent {
 
-  idUser: string = '';
+  idUser: number = 0;
 
-  constructor(private router: Router) {
+  constructor(private router: Router,) {
+
   }
 
-
-
-navigateTo(route: string) {
+  navigateTo(route: string) {
     if (this.router.url === route) {
       this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
         this.router.navigate([route]);

@@ -19,7 +19,6 @@ export class GamesComponent {
   games: Array<GameDTO> = [];
   totalPages: number = 0;
   currentPage: number = 0;
-  mainImage: string = "";
   searchControl = new FormControl('');
 
   constructor(private apiServiceGames: ApiServiceGamesService, private router: Router) {
@@ -108,7 +107,6 @@ export class GamesComponent {
   }
 
   viewGame(idGame: number) {
-    console.log(idGame)
     this.router.navigate(['/viewGame/' + idGame]);
   }
 

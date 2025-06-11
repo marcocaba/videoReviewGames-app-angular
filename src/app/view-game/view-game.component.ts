@@ -1,4 +1,4 @@
-import { CommonModule, Location, NgFor } from '@angular/common';
+import { CommonModule, Location, NgFor, NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ApiServiceGamesService } from '../api-service-games.service';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
@@ -38,6 +38,8 @@ export class ViewGameComponent implements OnInit {
     ).subscribe(() => {
       this.loadGameData();
     });
+
+    this.idGame = Number(this.route.snapshot.paramMap.get('idGame'));
   }
 
   ngOnInit() {

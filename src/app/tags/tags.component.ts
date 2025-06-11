@@ -3,7 +3,7 @@ import { CommonModule, NgFor, NgIf } from '@angular/common';
 import { GameDTO } from '../models/DTO/GameDTO';
 import { ApiServiceGamesService } from '../api-service-games.service';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ActivatedRoute, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { Tag } from '../models/Tag';
 
 @Component({
@@ -22,7 +22,7 @@ export class TagsComponent {
   tagId: number = 0;
   tag!: Tag;
 
-  constructor(private apiServiceGames: ApiServiceGamesService, private route: ActivatedRoute) {
+  constructor(private apiServiceGames: ApiServiceGamesService, private route: ActivatedRoute, private router: Router) {
     this.tagId = Number(this.route.snapshot.paramMap.get('tagsId'));
     this.getGamesByTag();
     this.getTagById();
@@ -94,5 +94,10 @@ export class TagsComponent {
         console.error(error);
       }
     })
+  }
+
+  viewGame(idGame: number) {
+    console.log(idGame)
+    this.router.navigate(['/viewGame/' + idGame]);
   }
 }

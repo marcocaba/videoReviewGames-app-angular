@@ -19,7 +19,7 @@
                             <button class="add-button" (click)="addFavorites(carouselGameActive?.id)">✰</button>
                         </div>
                         <div class="carousel-info">
-                            <button class="play-button" (click)="showGame(carouselGameActive?.id)">
+                            <button class="play-button"  [routerLink]="['/viewGame', carouselGameActive?.id]">
                                 <svg viewBox="0 0 24 24" fill="currentColor" width="48" height="48">
                                     <path d="M8 5v14l11-7z" />
                                 </svg>
@@ -40,7 +40,7 @@
         <section class="new-games-section">
             <h2>Nuevos Juegos</h2>
             <div class="games-grid">
-                <div class="game-card-thumbnail" *ngFor="let game of newGames">
+                <div class="game-card-thumbnail" *ngFor="let game of newGames" [routerLink]="['/viewGame', game.id]">
                     <img [src]="game.image" alt="{{game.name}}">
                     <h3>{{ game.name }}</h3>
                     <p>{{ game?.creators?.[0]?.name }}</p>

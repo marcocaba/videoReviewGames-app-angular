@@ -17,29 +17,31 @@
         </div>
     </div>
 
-    <div *ngFor="let game of games" class="card mb-3 bg-dark text-white border-secondary">
+    <div *ngFor="let game of games" class="card mb-3 bg-dark text-white border-secondary p-2">
         <div class="row g-0">
-            <div class="col-md-2 d-flex justify-content-center align-items-center p-2">
-                <img src="img\logo_et.png" class="img-fluid rounded-start" alt="poster" style="width: 100%;"
-                    *ngIf="game.image == 'joker'">
-                <img [src]="game.image" class="img-fluid rounded-start" alt="poster" style="width: 100%;"
-                    *ngIf="game.image != 'joker'">
+            <div class="col-md-2 d-flex flex-column justify-content-start align-items-center">
+                <ng-container *ngIf="game.image === 'joker'; else imageBlock">
+                    <img src="img/logo_et.png" class="img-fluid rounded-start mb-2" alt="poster" />
+                </ng-container>
+                <ng-template #imageBlock>
+                    <img [src]="game.image" class="img-fluid rounded-start mb-2" alt="poster" />
+                </ng-template>
+
+                <button class="btn btn-danger w-100" (click)="viewGame(game.id)">
+                    Ver Juego
+                </button>
             </div>
+
             <div class="col-md-10">
                 <div class="card-body">
-                    <div class="d-flex justify-content-between">
-                        <h5 class="card-title mb-1">
-                            {{ game.name }}
-                            <span class="text-white small"> ({{ game.released }})</span>
-                        </h5>
-                        <!-- <div class="d-flex align-items-center gap-2">
-              <span class="text-danger"><i class="bi bi-star-fill"></i></span>
-              <span>{{ games.rating }} ({{ games.ratingCount }})</span>
-              <button class="btn btn-sm btn-outline-light">Rate</button>
-            </div> -->
-                    </div>
+                    <h5 class="card-title mb-1">
+                        {{ game.name }}
+                        <span class="text-white small">({{ game.released }})</span>
+                    </h5>
+
                     <div class="mb-2">
-                        <span *ngFor="let genre of game.tags" class="badge bg-secondary me-1">{{ genre.name }}</span>
+                        <span *ngFor="let genre of game.tags" class="badge bg-secondary me-1"
+                            [routerLink]="['/tags', genre.id]">{{ genre.name }}</span>
                     </div>
 
                     <p class="mb-1">{{ cleanAndTruncateHtml(game.description) }}</p>
@@ -50,9 +52,6 @@
                             {{ game?.creators?.[0]?.name || 'No disponible' }}
                         </a>
                     </p>
-                    <!-- <div class="bg-secondary bg-opacity-10 p-2 rounded border-start border-4 border-danger">
-            <small class="text-white-50">{{ movie.review }}</small>
-          </div> -->
                 </div>
             </div>
         </div>
