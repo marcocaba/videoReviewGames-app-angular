@@ -155,6 +155,7 @@ export class ViewGameComponent implements OnInit {
     })
     this.newReview = new Review(0,0,0,"",0);
     this.loadGameData();
+    this.getRadomReview();
   }
 
   setScore(score: number) {
