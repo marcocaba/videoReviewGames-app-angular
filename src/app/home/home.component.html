@@ -16,7 +16,7 @@
                     <div class="carousel-overlay">
                         <div class="carousel-poster">
                             <img src="{{carouselGameActive?.image}}" class="poster-image">
-                            <button class="add-button" (click)="addGameToFavorites(carouselGameActive!)">✰</button>
+                            <button class="add-button " (click)="addGameToFavorites(carouselGameActive!)">✰</button>
                         </div>
                         <div class="carousel-info">
                             <button class="play-button" [routerLink]="['/viewGame', carouselGameActive?.id]">

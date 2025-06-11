@@ -2,7 +2,7 @@
   <div class="container text-center">
     
 
-    <button class="btn btn-danger mb-4" (click)="signIn()">
+    <button class="btn btn-danger mb-4" (click)="signIn()" *ngIf="!logged">
       Inicia sesión en Enfants Terribles
     </button>
 
