@@ -153,7 +153,8 @@ export class ViewGameComponent implements OnInit {
         console.log(error);
       }
     })
-
+    this.newReview = new Review(0,0,0,"",0);
+    this.loadGameData();
   }
 
   setScore(score: number) {
