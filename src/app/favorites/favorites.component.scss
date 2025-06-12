@@ -1,4 +1,10 @@
 .darker-background {
+  min-height: 80vh; /* O el tamaño que necesites */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.darker-background {
   background-color: rgba(0, 0, 0, 0.85);
   padding: 1rem;
 }
