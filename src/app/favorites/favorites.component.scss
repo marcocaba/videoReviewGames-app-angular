@@ -1,5 +1,47 @@
 .darker-background {
-  background-color: rgba(0, 0, 0, 0.85); /* negro casi opaco */
-  border-radius: 0.5rem;
+  background-color: rgba(0, 0, 0, 0.85);
   padding: 1rem;
+}
+
+.game-image {
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  cursor: pointer;
+  overflow: hidden;
+
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
+    z-index: 1;
+  }
+}
+
+.poster-image-container {
+  padding: 0.5rem;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  cursor: pointer;
+  overflow: hidden;
+
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
+    z-index: 1;
+  }
+}
+
+.poster-image-wrapper {
+  position: relative;
+  width: 100%;
+  padding-top: 150%;
+  overflow: hidden;
+  border-radius: var(--bs-border-radius-sm);
+}
+
+.poster-image-wrapper img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
