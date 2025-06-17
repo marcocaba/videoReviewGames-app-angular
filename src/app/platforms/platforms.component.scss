@@ -1,4 +1,5 @@
 .darker-background {
+  min-height: 80vh;
   background-color: rgba(0, 0, 0, 0.85);
   padding: 1rem;
 }
@@ -44,4 +45,23 @@
   height: 100%;
   object-fit: cover;
   display: block;
+}
+
+@keyframes show {
+    from {
+        opacity: 0; scale: 10%;
+    }
+    to {
+        opacity: 1; scale: 100%;
+    }
+}
+
+.container-game {
+    view-timeline-name: --reveal;
+
+    animation-name: show;
+    animation-fill-mode: both;
+
+    animation-timeline: --reveal;
+    animation-range: entry 25% cover 50%;
 }

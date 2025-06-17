@@ -14,7 +14,7 @@
             <a *ngIf="currentPage < totalPages - 1" (click)="nextPage()" style="cursor: pointer;"> Siguiente </a>
         </div>
     </div>
-    <div *ngFor="let game of games" class="card mb-3 bg-dark text-white border-secondary p-2 container">
+    <div *ngFor="let game of games" class="card mb-3 bg-dark text-white border-secondary p-2 container container-game">
         <div class="row g-0">
             <div
                 class="col-md-2 d-flex flex-column justify-content-center align-items-center ps-1 rounded poster-image-container shadow-sm">

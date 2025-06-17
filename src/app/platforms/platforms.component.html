@@ -14,10 +14,10 @@
             <a *ngIf="currentPage < totalPages - 1" (click)="nextPage()" style="cursor: pointer;"> Siguiente </a>
         </div>
     </div>
-    <div *ngFor="let game of games" class="card mb-3 bg-dark text-white border-secondary p-2 container">
-        <div class="row g-0">
+    <div *ngFor="let game of games" class="card mb-3 bg-dark text-white border-secondary p-2 container container-game">
+        <div class="row g-0 " >
             <div
-                class="col-md-2 d-flex flex-column justify-content-center align-items-center ps-1 rounded poster-image-container shadow-sm">
+                class="col-md-2 d-flex flex-column justify-content-center align-items-center ps-1 rounded poster-image-container shadow-sm ">
                 <div class="poster-image-wrapper">
                     <ng-container *ngIf="game.image === 'joker' && game.id; else imageBlock">
                         <img src="/img/logo_et.png" class="img-fluid rounded-start" alt="poster"

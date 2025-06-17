@@ -31,6 +31,18 @@ export class HomeComponent {
 
   }
 
+  // ngOnInit() {
+  //   if (isPlatformBrowser(this.platformId)) {
+  //     if (!sessionStorage.getItem('reloaded')) {
+  //       sessionStorage.setItem('reloaded', 'true');
+  //       window.location.reload();
+  //     } else {
+  //       sessionStorage.removeItem('reloaded');
+  //     }
+  //   }
+
+  // }
+
   ngOnInit() {
     if (isPlatformBrowser(this.platformId)) {
       if (!sessionStorage.getItem('reloaded')) {
@@ -39,6 +51,11 @@ export class HomeComponent {
       } else {
         sessionStorage.removeItem('reloaded');
       }
+
+      // AUTO-SLIDE CADA 4 SEGUNDOS
+      setInterval(() => {
+        this.nextSlide();
+      }, 4000); // Cambia el intervalo si quieres más rápido/lento
     }
   }
 
@@ -85,12 +102,18 @@ export class HomeComponent {
     this.apiServiceGames.getCarouselGames().subscribe({
       next: response => {
         this.carouselGames = response;
+        if (this.carouselGames.length > 0) {
+          this.carouselGameActive = this.carouselGames[0];
+          this.carouselCount = 0;
+        }
       },
       error: error => {
         console.error(error);
       }
     });
   }
+
+  
 
   getBestGames() {
     this.apiServiceGames.getFourBestGames().subscribe({
